@@ -1,0 +1,29 @@
+.control {
+  background-color: rgb(136, 178, 223);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-link {
+  color: aliceblue;
+  width: auto;
+  background-color: rgb(80, 143, 185);
+  display: inline-block;
+  margin: 0.5rem 0rem;
+  margin-right: 0.5rem;
+  border: 4px outset #1c6ea4;
+  border-radius: 25px;
+  padding: 0.2rem 1rem;
+  text-decoration: none;
+  cursor: default;
+}
+
+.nav-link:hover {
+  background-color: cadetblue;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
