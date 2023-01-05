@@ -1,5 +1,3 @@
-import React from "react";
-import { isPropertySignature } from "typescript";
 import classes from "./Todo.module.css";
 
 interface Props {

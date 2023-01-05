@@ -4,6 +4,7 @@ import classes from "./AddTodo.module.css";
 
 interface PropsType {
   addTodo: (a: { text: string; id: number }) => void;
+  inputError: (a: string) => void;
 }
 
 const AddTodo = (props: PropsType) => {
@@ -12,8 +13,10 @@ const AddTodo = (props: PropsType) => {
   const submitTodoHandler = (event: React.FormEvent) => {
     event.preventDefault();
     if (!inputRef.current) throw Error("inputRef is not assigned");
-    if (inputRef.current.value.length === 0 || !isNaN(Number(inputRef.current.value)))
+    if (inputRef.current.value.length === 0 || !isNaN(Number(inputRef.current.value))) {
+      props.inputError("Enter a valid todo!");
       throw Error("Enter a valid todo!");
+    }
     props.addTodo({ text: inputRef.current.value, id: Math.random() });
     inputRef.current.value = "";
   };

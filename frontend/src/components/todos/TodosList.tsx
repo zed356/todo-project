@@ -2,8 +2,7 @@ import Todo from "./Todo";
 import AddTodo from "./AddTodo";
 import classes from "./TodosList.module.css";
 import { useState } from "react";
-
-// const DUMMY_TODOS = [{ text: "dis pls" }, { text: "meow pls" }, { text: "tiapa pls" }];
+import Modal from "../ui/Modal";
 
 type TodoType = {
   text: string;
@@ -12,6 +11,11 @@ type TodoType = {
 
 const TodosList = () => {
   const [todoList, setTodoList] = useState<TodoType[]>([]);
+  const [showErrorModal, setShowErrorModal] = useState({ show: false, error: "" });
+
+  const errorModalHandler = (msg: string) => {
+    setShowErrorModal({ show: true, error: msg });
+  };
 
   const todoListHandler = (newTodo: TodoType) => {
     setTodoList((prev) => {
@@ -37,8 +41,14 @@ const TodosList = () => {
   return (
     <main className={classes.main}>
       <h2 className={classes.header}>Todos</h2>
-      <AddTodo addTodo={todoListHandler} />
+      <AddTodo inputError={errorModalHandler} addTodo={todoListHandler} />
       {checkEmptyList}
+      {showErrorModal.show && (
+        <Modal
+          close={() => setShowErrorModal({ show: false, error: "" })}
+          error={showErrorModal.error}
+        />
+      )}
     </main>
   );
 };
