@@ -4,7 +4,11 @@
   align-items: center;
 }
 
-.todolist {
+.header {
+  border-bottom: 0.15rem inset #1c6ea4;
+}
+
+.todo-list {
   display: flex;
   padding: 0;
   flex-direction: column;

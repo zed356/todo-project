@@ -1,14 +1,16 @@
-.container {
+/* .container {
+  display: flex;
+  flex-direction: column;
+} */
+
+.form-control {
   display: flex;
   flex-direction: column;
 }
 
-.form-control {
-  padding: 0.5rem 0;
-}
-
 button {
   margin: auto;
+  margin-top: 0.3rem;
   width: 4rem;
   border: 1px solid #1c6ea4;
   border-radius: 0.25rem;
