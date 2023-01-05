@@ -1,4 +1,17 @@
-.todo {
+.container {
+  display: flex;
   list-style: none;
+}
+
+.todo {
   border-bottom: 0.1rem solid #1c6ea4;
+}
+
+.delete {
+  margin-left: 0.5rem;
+  cursor: default;
+}
+
+.delete:hover {
+  color: red;
 }

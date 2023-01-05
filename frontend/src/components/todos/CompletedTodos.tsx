@@ -3,9 +3,11 @@ import classes from "./CompletedTodos.module.css";
 
 const CompletedTodos = () => {
   return (
-    <Card>
-      <div className={classes.temp}>Completed Todos.. to be completed!</div>
-    </Card>
+    <div className={classes.container}>
+      <Card>
+        <div className={classes.temp}>Completed Todos.. to be completed!</div>
+      </Card>
+    </div>
   );
 };
 

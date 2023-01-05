@@ -19,13 +19,17 @@ const TodosList = () => {
     });
   };
 
+  const deleteTodo = (id: number) => {
+    setTodoList((prev) => prev.filter((el) => el.id !== id));
+  };
+
   const checkEmptyList =
     todoList.length === 0 ? (
       <p>Add a Todo bish!</p>
     ) : (
       <ul className={classes["todo-list"]}>
         {todoList.map((el) => (
-          <Todo todo={el} key={el.id} />
+          <Todo deleteTodo={deleteTodo} todo={el} key={el.id} />
         ))}
       </ul>
     );

@@ -1,7 +1,28 @@
+import React from "react";
+import { isPropertySignature } from "typescript";
 import classes from "./Todo.module.css";
 
-const Todo = (props: { todo: { text: string } }) => {
-  return <li className={classes.todo}>{props.todo.text}</li>;
+interface Props {
+  todo: {
+    text: string;
+    id: number;
+  };
+  deleteTodo: (a: number) => void;
+}
+
+const Todo = (props: Props) => {
+  const deleteTodoHandler = () => {
+    props.deleteTodo(props.todo.id);
+  };
+
+  return (
+    <li className={classes.container}>
+      <div className={classes.todo}>{props.todo.text}</div>
+      <div onClick={deleteTodoHandler} className={classes.delete}>
+        ✖
+      </div>
+    </li>
+  );
 };
 
 export default Todo;
