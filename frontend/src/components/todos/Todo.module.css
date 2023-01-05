@@ -10,8 +10,33 @@
 .delete {
   margin-left: 0.5rem;
   cursor: default;
+  transition: all 0.1s ease-in-out;
 }
 
 .delete:hover {
   color: red;
+  transform: scale(1.1);
+}
+
+.edit {
+  margin-left: 0.5rem;
+  cursor: default;
+  transition: all 0.1s ease-in-out;
+}
+
+.edit:hover {
+  color: rgba(63, 62, 62, 0.61);
+  transform: scale(1.1);
+}
+
+.completed {
+  margin-right: 0.5rem;
+  cursor: default;
+  color: rgb(136, 178, 223);
+  transition: all 0.1s ease-in-out;
+}
+
+.completed:hover {
+  color: green;
+  transform: scale(1.1);
 }
