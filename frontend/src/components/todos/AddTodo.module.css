@@ -19,3 +19,7 @@ button {
 button:hover {
   background-color: cadetblue;
 }
+
+textarea {
+  resize: none;
+}

@@ -1,3 +1,4 @@
+import React, { useRef, useState } from "react";
 import classes from "./Todo.module.css";
 
 interface Props {
@@ -6,25 +7,57 @@ interface Props {
     id: number;
   };
   deleteTodo: (a: number) => void;
+  updateTodo: (a: { id: number; text: string }) => void;
 }
 
 const Todo = (props: Props) => {
+  const [editing, setEditing] = useState(false);
+  const editedTodoRef = useRef<HTMLTextAreaElement>(null);
+
   const deleteTodoHandler = () => {
     props.deleteTodo(props.todo.id);
   };
 
   const editHandler = () => {
     // Add this next!
+    setEditing(true);
   };
 
-  return (
-    <li className={classes.container}>
+  const saveEditHandler = () => {
+    if (editedTodoRef.current) {
+      props.updateTodo({ id: props.todo.id, text: editedTodoRef.current.value });
+    }
+    setEditing(false);
+  };
+
+  const todoContent = !editing ? (
+    <div className={classes.buttons}>
       <div className={classes.completed}>☑</div>
-      <div className={classes.todo}>{props.todo.text}</div>
+      <div onClick={editHandler} className={classes.edit}>
+        🖊
+      </div>
       <div onClick={deleteTodoHandler} className={classes.delete}>
         ✖
       </div>
-      <div className={classes.edit}>🖊</div>
+    </div>
+  ) : (
+    <div className={classes["save-container"]}>
+      <div onClick={saveEditHandler} className={classes.saveEditedTodo}>
+        💾
+      </div>
+    </div>
+  );
+
+  return (
+    <li className={classes["list-item"]}>
+      {todoContent}
+      <div className={classes.todo}>
+        {!editing ? (
+          props.todo.text
+        ) : (
+          <textarea ref={editedTodoRef} defaultValue={props.todo.text} />
+        )}
+      </div>
     </li>
   );
 };

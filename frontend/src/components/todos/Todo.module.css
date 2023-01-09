@@ -1,6 +1,14 @@
-.container {
+.list-item {
   display: flex;
   list-style: none;
+  margin: 0 1rem;
+  margin-bottom: 0.5rem;
+  flex-direction: column;
+}
+
+.buttons {
+  display: inline-flex;
+  justify-content: flex-end;
 }
 
 .todo {
@@ -25,12 +33,11 @@
 }
 
 .edit:hover {
-  color: rgba(63, 62, 62, 0.61);
+  color: rgba(67, 65, 197, 0.61);
   transform: scale(1.1);
 }
 
 .completed {
-  margin-right: 0.5rem;
   cursor: default;
   color: rgb(136, 178, 223);
   transition: all 0.1s ease-in-out;
@@ -38,5 +45,18 @@
 
 .completed:hover {
   color: green;
+  transform: scale(1.1);
+}
+
+.save-container {
+  display: flex;
+}
+
+.saveEditedTodo {
+  cursor: default;
+  transition: all 0.1s;
+}
+
+.saveEditedTodo:hover {
   transform: scale(1.1);
 }

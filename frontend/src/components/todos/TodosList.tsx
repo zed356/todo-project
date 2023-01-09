@@ -27,13 +27,22 @@ const TodosList = () => {
     setTodoList((prev) => prev.filter((el) => el.id !== id));
   };
 
+  const updateTodoHandler = (updatedTodo: { id: number; text: string }) => {
+    setTodoList((prev) => {
+      const helperArr = prev;
+      const index = prev.findIndex((el) => el.id === updatedTodo.id);
+      helperArr[index] = updatedTodo;
+      return [...helperArr];
+    });
+  };
+
   const checkEmptyList =
     todoList.length === 0 ? (
       <p>Add a Todo bish!</p>
     ) : (
       <ul className={classes["todo-list"]}>
         {todoList.map((el) => (
-          <Todo deleteTodo={deleteTodo} todo={el} key={el.id} />
+          <Todo updateTodo={updateTodoHandler} deleteTodo={deleteTodo} todo={el} key={el.id} />
         ))}
       </ul>
     );

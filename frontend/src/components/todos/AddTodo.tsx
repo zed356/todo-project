@@ -8,7 +8,7 @@ interface PropsType {
 }
 
 const AddTodo = (props: PropsType) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const submitTodoHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -24,8 +24,8 @@ const AddTodo = (props: PropsType) => {
   return (
     <Card>
       <div className={classes.container}>
-        <form className={classes["form-control"]} onSubmit={submitTodoHandler}>
-          <input ref={inputRef} type="text" placeholder="todo text" name="todo" />
+        <form id="todo" className={classes["form-control"]} onSubmit={submitTodoHandler}>
+          <textarea form="todo" maxLength={50} ref={inputRef} placeholder="todo text" name="todo" />
           <label htmlFor="todo"></label>
           <button type="submit">Create</button>
         </form>

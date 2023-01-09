@@ -1,3 +1,4 @@
+import React from "react";
 import classes from "./Modal.module.css";
 
 interface Props {
@@ -7,9 +8,12 @@ interface Props {
 
 const Modal = (props: Props) => {
   return (
-    <div onClick={props.close} id="myModal" className={classes.modal}>
+    <div id="myModal" className={classes.modal}>
+      <div onClick={props.close} className={classes.background}></div>
       <div className={classes["modal-content"]}>
-        <span className={classes["close"]}>&times;</span>
+        <span onClick={props.close} className={classes["close"]}>
+          &times;
+        </span>
         <p>{props.error}</p>
       </div>
     </div>
