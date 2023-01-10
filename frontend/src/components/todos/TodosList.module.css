@@ -11,6 +11,7 @@
 .todo-list {
   display: flex;
   padding: 0;
+  margin-top: 3rem;
   justify-content: center;
   align-items: center;
 }

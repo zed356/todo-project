@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import Card from "../ui/Card";
 import classes from "./Todo.module.css";
 
 interface Props {
@@ -51,6 +52,7 @@ const Todo = (props: Props) => {
   return (
     <li className={classes["list-item"]}>
       {todoContent}
+      {/* <Card> */}
       <div className={classes.todo}>
         {!editing ? (
           props.todo.text
@@ -58,6 +60,7 @@ const Todo = (props: Props) => {
           <textarea ref={editedTodoRef} defaultValue={props.todo.text} />
         )}
       </div>
+      {/* </Card> */}
     </li>
   );
 };

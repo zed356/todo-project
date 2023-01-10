@@ -9,8 +9,14 @@ type TodoType = {
   id: number;
 };
 
+const DUMMY_LIST = [
+  { text: "tiapa!", id: Math.random() },
+  { text: "mau!!", id: Math.random() },
+  { text: "wup wup!", id: Math.random() },
+];
+
 const TodosList = () => {
-  const [todoList, setTodoList] = useState<TodoType[]>([]);
+  const [todoList, setTodoList] = useState<TodoType[]>(DUMMY_LIST);
   const [showErrorModal, setShowErrorModal] = useState({ show: false, error: "" });
 
   const errorModalHandler = (msg: string) => {

@@ -12,7 +12,10 @@
 }
 
 .todo {
-  border-bottom: 0.1rem solid #1c6ea4;
+  border: 1px solid #5597ce;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: rgb(229, 229, 233);
 }
 
 .delete {

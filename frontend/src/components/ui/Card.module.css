@@ -1,4 +1,5 @@
 .card {
+  all: inherit;
   border: 1px solid #1c6ea4;
   border-radius: 8px;
   padding: 0.5rem;
