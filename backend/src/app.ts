@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(todos);
 
 mongoose
-  .connect("mongodb+srv://we:we@cluster0.kap9i.mongodb.net/test")
+  .connect("mongodb+srv://we:we@cluster0.kap9i.mongodb.net/firstproj-todos")
   .then((result: any) => {
     return console.log("successfully connected to mongo!");
   })

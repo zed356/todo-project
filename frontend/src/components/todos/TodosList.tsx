@@ -7,17 +7,13 @@ import Modal from "../ui/Modal";
 type TodoType = {
   text: string;
   id: number;
+  _id?: string;
 };
-
-const DUMMY_LIST = [
-  { text: "tiapa!", id: Math.random() },
-  { text: "mau!!", id: Math.random() },
-  { text: "wup wup!", id: Math.random() },
-];
 
 const TodosList = () => {
   const [todoList, setTodoList] = useState<TodoType[]>([]);
   const [showErrorModal, setShowErrorModal] = useState({ show: false, error: "" });
+  const [isLoading, setIsLoading] = useState(true);
 
   const errorModalHandler = (msg: string) => {
     setShowErrorModal({ show: true, error: msg });
@@ -48,29 +44,34 @@ const TodosList = () => {
     ) : (
       <ul className={classes["todo-list"]}>
         {todoList.map((el) => (
-          <Todo updateTodo={updateTodoHandler} deleteTodo={deleteTodo} todo={el} key={el.id} />
+          <Todo updateTodo={updateTodoHandler} deleteTodo={deleteTodo} todo={el} key={el._id} />
         ))}
       </ul>
     );
 
   useEffect(() => {
-    console.log("fetch todos ran");
     fetch("http://localhost:8080/todos")
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         if (data) {
           setTodoList(data);
+          setIsLoading(false);
         }
       });
-  }, []);
+  }, [isLoading]);
 
   return (
     <main className={classes.main}>
       <h2 className={classes.header}>Todos</h2>
-      <AddTodo inputError={errorModalHandler} addTodo={todoListHandler} />
+      <AddTodo
+        addingTodo={() => {
+          setIsLoading(true);
+        }}
+        inputError={errorModalHandler}
+        addTodo={todoListHandler}
+      />
       {checkEmptyList}
       {showErrorModal.show && (
         <Modal

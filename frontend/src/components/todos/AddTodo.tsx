@@ -5,6 +5,7 @@ import classes from "./AddTodo.module.css";
 interface PropsType {
   addTodo: (a: { text: string; id: number }) => void;
   inputError: (a: string) => void;
+  addingTodo: () => void;
 }
 
 const AddTodo = (props: PropsType) => {
@@ -27,11 +28,9 @@ const AddTodo = (props: PropsType) => {
       },
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
+      .then((data) => {});
 
-    props.addTodo({ text: todoTxt, id: Math.random() });
+    props.addingTodo();
     inputRef.current.value = "";
   };
 
