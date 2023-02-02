@@ -23,3 +23,7 @@ button:hover {
 textarea {
   resize: none;
 }
+
+textarea:focus {
+  outline: 0.1rem solid #1c6ea4;
+}

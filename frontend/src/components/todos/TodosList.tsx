@@ -1,7 +1,7 @@
 import Todo from "./Todo";
 import AddTodo from "./AddTodo";
 import classes from "./TodosList.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../ui/Modal";
 
 type TodoType = {
@@ -16,7 +16,7 @@ const DUMMY_LIST = [
 ];
 
 const TodosList = () => {
-  const [todoList, setTodoList] = useState<TodoType[]>(DUMMY_LIST);
+  const [todoList, setTodoList] = useState<TodoType[]>([]);
   const [showErrorModal, setShowErrorModal] = useState({ show: false, error: "" });
 
   const errorModalHandler = (msg: string) => {
@@ -52,6 +52,20 @@ const TodosList = () => {
         ))}
       </ul>
     );
+
+  useEffect(() => {
+    console.log("fetch todos ran");
+    fetch("http://localhost:8080/todos")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          setTodoList(data);
+        }
+      });
+  }, []);
 
   return (
     <main className={classes.main}>

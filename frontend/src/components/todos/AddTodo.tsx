@@ -17,7 +17,21 @@ const AddTodo = (props: PropsType) => {
       props.inputError("Enter a valid todo!");
       throw Error("Enter a valid todo!");
     }
-    props.addTodo({ text: inputRef.current.value, id: Math.random() });
+    const todoTxt = inputRef.current.value;
+
+    fetch("http://localhost:8080/add", {
+      method: "POST",
+      body: JSON.stringify({ text: todoTxt }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+
+    props.addTodo({ text: todoTxt, id: Math.random() });
     inputRef.current.value = "";
   };
 
