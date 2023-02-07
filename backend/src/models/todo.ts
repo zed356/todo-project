@@ -8,4 +8,6 @@ const todoSchema = new Schema<Todo>({
   text: { type: String, required: true },
 });
 
-module.exports = model("Todo", todoSchema);
+// module.exports = model("Todo", todoSchema);
+
+export default model("Todo", todoSchema);

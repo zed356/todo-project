@@ -1,8 +1,14 @@
-const express = require("express");
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+
+// const express = require("express");
+// const mongoose = require("mongoose");
+// const cors = require("cors");
+// const bodyParser = require("body-parser");
+
 const app = express();
-const cors = require("cors");
-const bodyParser = require("body-parser");
 
 const todos = require("./routes/todos");
 

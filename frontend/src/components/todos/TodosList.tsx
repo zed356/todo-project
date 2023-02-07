@@ -6,7 +6,7 @@ import Modal from "../ui/Modal";
 
 type TodoType = {
   text: string;
-  id: number;
+  id: string;
   _id?: string;
 };
 
@@ -25,11 +25,11 @@ const TodosList = () => {
     });
   };
 
-  const deleteTodo = (id: number) => {
+  const deleteTodo = (id: string) => {
     setTodoList((prev) => prev.filter((el) => el.id !== id));
   };
 
-  const updateTodoHandler = (updatedTodo: { id: number; text: string }) => {
+  const updateTodoHandler = (updatedTodo: { id: string; text: string }) => {
     setTodoList((prev) => {
       const helperArr = prev;
       const index = prev.findIndex((el) => el.id === updatedTodo.id);
@@ -38,7 +38,7 @@ const TodosList = () => {
     });
   };
 
-  const checkEmptyList =
+  const todoListCheckIfEmpty =
     todoList.length === 0 ? (
       <p>Add a Todo bish!</p>
     ) : (
@@ -56,7 +56,11 @@ const TodosList = () => {
       })
       .then((data) => {
         if (data) {
-          setTodoList(data);
+          setTodoList(
+            data.map((el: TodoType) => {
+              return { ...el, id: el._id };
+            })
+          );
           setIsLoading(false);
         }
       });
@@ -72,7 +76,7 @@ const TodosList = () => {
         inputError={errorModalHandler}
         addTodo={todoListHandler}
       />
-      {checkEmptyList}
+      {todoListCheckIfEmpty}
       {showErrorModal.show && (
         <Modal
           close={() => setShowErrorModal({ show: false, error: "" })}

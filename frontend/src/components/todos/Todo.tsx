@@ -5,10 +5,10 @@ import classes from "./Todo.module.css";
 interface Props {
   todo: {
     text: string;
-    id: number;
+    id: string;
   };
-  deleteTodo: (a: number) => void;
-  updateTodo: (a: { id: number; text: string }) => void;
+  deleteTodo: (a: string) => void;
+  updateTodo: (a: { id: string; text: string }) => void;
 }
 
 const Todo = (props: Props) => {
@@ -16,6 +16,8 @@ const Todo = (props: Props) => {
   const editedTodoRef = useRef<HTMLTextAreaElement>(null);
 
   const deleteTodoHandler = () => {
+    fetch(`http://localhost:8080/delete/${props.todo.id}`, { method: "DELETE" });
+    console.log(props.todo.id);
     props.deleteTodo(props.todo.id);
   };
 
@@ -52,7 +54,6 @@ const Todo = (props: Props) => {
   return (
     <li className={classes["list-item"]}>
       {todoContent}
-      {/* <Card> */}
       <div className={classes.todo}>
         {!editing ? (
           props.todo.text

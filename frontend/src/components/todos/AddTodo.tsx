@@ -3,7 +3,7 @@ import Card from "../ui/Card";
 import classes from "./AddTodo.module.css";
 
 interface PropsType {
-  addTodo: (a: { text: string; id: number }) => void;
+  addTodo: (a: { text: string; id: string }) => void;
   inputError: (a: string) => void;
   addingTodo: () => void;
 }
