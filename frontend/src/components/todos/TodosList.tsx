@@ -3,6 +3,7 @@ import AddTodo from "./AddTodo";
 import classes from "./TodosList.module.css";
 import { useEffect, useState } from "react";
 import Modal from "../ui/Modal";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 type TodoType = {
   text: string;
@@ -36,11 +37,18 @@ const TodosList = () => {
       helperArr[index] = updatedTodo;
       return [...helperArr];
     });
+    fetch(`http://localhost:8080/update/${updatedTodo.id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ text: updatedTodo.text }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   const todoListCheckIfEmpty =
     todoList.length === 0 ? (
-      <p>Add a Todo bish!</p>
+      (isLoading && <LoadingSpinner />) || "Add a todo bish!"
     ) : (
       <ul className={classes["todo-list"]}>
         {todoList.map((el) => (

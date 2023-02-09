@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import Card from "../ui/Card";
 import classes from "./Todo.module.css";
 
 interface Props {
@@ -32,15 +31,17 @@ const Todo = (props: Props) => {
     }
     setEditing(false);
   };
-
   const todoContent = !editing ? (
-    <div className={classes.buttons}>
-      <div className={classes.completed}>☑</div>
-      <div onClick={editHandler} className={classes.edit}>
-        🖊
-      </div>
-      <div onClick={deleteTodoHandler} className={classes.delete}>
-        ✖
+    <div className={classes["top-todo-container"]}>
+      <span>Date</span>
+      <div className={classes.buttons}>
+        <div className={classes.completed}>☑</div>
+        <div onClick={editHandler} className={classes.edit}>
+          🖊
+        </div>
+        <div onClick={deleteTodoHandler} className={classes.delete}>
+          ✖
+        </div>
       </div>
     </div>
   ) : (
@@ -53,10 +54,10 @@ const Todo = (props: Props) => {
 
   return (
     <li className={classes["list-item"]}>
-      {todoContent}
       <div className={classes.todo}>
+        {todoContent}
         {!editing ? (
-          props.todo.text
+          <p>{props.todo.text}</p>
         ) : (
           <textarea ref={editedTodoRef} defaultValue={props.todo.text} />
         )}

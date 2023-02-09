@@ -4,21 +4,42 @@
   margin: 0 1rem;
   margin-bottom: 0.5rem;
   flex-direction: column;
+  align-items: center;
   width: 100%;
 }
 
+.top-todo-container {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #5597ce;
+}
+
+.top-todo-container span {
+  font-style: italic;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
 .buttons {
-  display: inline-flex;
-  justify-content: flex-end;
+  display: flex;
+  justify-content: end;
 }
 
 .todo {
   border: 1px solid #5597ce;
   border-radius: 0.5rem;
-  text-align: center;
-  padding: 1rem 0;
+  padding: 0 0.5rem;
   background-color: rgb(229, 229, 233);
   width: 100%;
+  height: auto;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.todo p {
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
 }
 
 .delete {

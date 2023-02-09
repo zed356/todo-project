@@ -5,9 +5,6 @@ import mongoose from "mongoose";
 import Todo from "../models/todo";
 import User from "../models/user";
 
-// const Todo = require("../models/todo");
-// const User = require("../models/user");
-// const express = require("express");
 const router = express.Router();
 
 interface Todo {
@@ -28,12 +25,16 @@ router.post("/add", (req: Request, res: Response, next: NextFunction) => {
 });
 
 router.delete("/delete/:todoId", (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.params.todoId);
   const targetId = new mongoose.Types.ObjectId(req.params.todoId);
-  console.log(targetId);
   Todo.deleteOne({ _id: targetId }).then(() => {
     console.log("deletes?");
   });
+});
+
+router.patch("/update/:todoId", (req: Request, res: Response, next: NextFunction) => {
+  const targetId = new mongoose.Types.ObjectId(req.params.todoId);
+
+  Todo.findOneAndUpdate({ _id: targetId }, { text: req.body.text }).then((res) => console.log(res));
 });
 
 module.exports = router;
