@@ -23,7 +23,7 @@ const AddTodo = (props: PropsType) => {
 
     fetch("http://localhost:8080/add", {
       method: "POST",
-      body: JSON.stringify({ text: todoTxt, completed: false }),
+      body: JSON.stringify({ text: todoTxt, completed: false, date: new Date() }),
       headers: {
         "Content-Type": "application/json",
       },

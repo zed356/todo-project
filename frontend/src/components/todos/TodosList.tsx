@@ -9,14 +9,14 @@ import { setInitialTodoList, addTodo, deleteTodo, updateTodo } from "../../store
 import { RootState } from "../../store/store";
 
 export type TodoType = {
+  _id?: string;
   text: string;
   id: string;
-  _id?: string;
   completed: boolean;
+  date: Date;
 };
 
 const TodosList = () => {
-  // const [todoList, setTodoList] = useState<TodoType[]>([]);
   const [showErrorModal, setShowErrorModal] = useState({ show: false, error: "" });
   const [isLoading, setIsLoading] = useState(true);
 
@@ -39,19 +39,12 @@ const TodosList = () => {
   const updateTodoHandler = async (updatedTodo: TodoType) => {
     const res = await fetch(`http://localhost:8080/update/${updatedTodo.id}`, {
       method: "PATCH",
-      body: JSON.stringify({ text: updatedTodo.text }),
+      body: JSON.stringify({ text: updatedTodo.text, completed: updatedTodo.completed }),
       headers: {
         "Content-Type": "application/json",
       },
     });
     res.status === 201 && dispatch(updateTodo(updatedTodo));
-  };
-
-  const setTodoCompleted = async (completedTodo: TodoType) => {
-    const res = await fetch(`http://localhost:8080/complete/${completedTodo.id}`, {
-      method: "PATCH",
-    });
-    res.status === 201 && dispatch(updateTodo(completedTodo));
   };
 
   const todoListCheckIfEmpty =
@@ -65,7 +58,6 @@ const TodosList = () => {
           (el) =>
             !el.completed && (
               <Todo
-                completeTodo={setTodoCompleted}
                 updateTodo={updateTodoHandler}
                 deleteTodo={deleteTodoHandler}
                 todo={el}

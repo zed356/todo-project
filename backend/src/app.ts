@@ -2,15 +2,9 @@ import mongoose from "mongoose";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-
-// const express = require("express");
-// const mongoose = require("mongoose");
-// const cors = require("cors");
-// const bodyParser = require("body-parser");
+import todos from "./routes/todos";
 
 const app = express();
-
-const todos = require("./routes/todos");
 
 const User = require("./models/user");
 

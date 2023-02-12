@@ -8,14 +8,16 @@ const CompletedTodos = () => {
   return (
     <div className={classes.container}>
       {todos.length ? (
-        todos.map((el) => (
-          <div className={classes.todo}>
-            {" "}
-            <Todo todo={el} key={el.id} />
-          </div>
-        ))
+        todos.map(
+          (el) =>
+            el.completed && (
+              <div className={classes.todo} key={el.id}>
+                <Todo todo={el} />
+              </div>
+            )
+        )
       ) : (
-        <div className={classes.temp}>Completed Todos.. to be completed!</div>
+        <div className={classes.temp}>Completed Todos.. if there were any..!</div>
       )}
     </div>
   );

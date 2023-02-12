@@ -23,7 +23,7 @@ export const todoListSlice = createSlice({
     },
     updateTodo: (state, action: PayloadAction<TodoType>) => {
       const targetIndex = state.value.findIndex((el) => el.id === action.payload.id);
-      state.value[targetIndex] = { ...state.value[targetIndex], completed: true };
+      state.value[targetIndex] = action.payload;
       return;
     },
     deleteTodo: (state, action: PayloadAction<string>) => {
