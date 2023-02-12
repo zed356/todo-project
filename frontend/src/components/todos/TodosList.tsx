@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import Modal from "../ui/Modal";
 import LoadingSpinner from "../ui/LoadingSpinner";
 
-type TodoType = {
+export type TodoType = {
   text: string;
   id: string;
   _id?: string;
+  completed: boolean;
 };
 
 const TodosList = () => {
@@ -30,7 +31,7 @@ const TodosList = () => {
     setTodoList((prev) => prev.filter((el) => el.id !== id));
   };
 
-  const updateTodoHandler = (updatedTodo: { id: string; text: string }) => {
+  const updateTodoHandler = (updatedTodo: TodoType) => {
     setTodoList((prev) => {
       const helperArr = prev;
       const index = prev.findIndex((el) => el.id === updatedTodo.id);
@@ -46,14 +47,37 @@ const TodosList = () => {
     });
   };
 
+  const setTodoCompleted = (id: string) => {
+    setTodoList((prev) => {
+      return prev.map((el) => {
+        if (el.id === id) {
+          fetch(`http://localhost:8080/complete/${el.id}`, { method: "PATCH" });
+          return { ...el, completed: true };
+        }
+        return el;
+      });
+    });
+  };
+
   const todoListCheckIfEmpty =
     todoList.length === 0 ? (
-      (isLoading && <LoadingSpinner />) || "Add a todo bish!"
+      (isLoading && <LoadingSpinner />) || (
+        <p className={classes["empty-todo-msg"]}>Add a todo bish!</p>
+      )
     ) : (
       <ul className={classes["todo-list"]}>
-        {todoList.map((el) => (
-          <Todo updateTodo={updateTodoHandler} deleteTodo={deleteTodo} todo={el} key={el._id} />
-        ))}
+        {todoList.map(
+          (el) =>
+            !el.completed && (
+              <Todo
+                completeTodo={setTodoCompleted}
+                updateTodo={updateTodoHandler}
+                deleteTodo={deleteTodo}
+                todo={el}
+                key={el._id}
+              />
+            )
+        )}
       </ul>
     );
 

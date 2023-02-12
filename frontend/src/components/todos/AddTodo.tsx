@@ -1,9 +1,10 @@
 import React, { useRef } from "react";
 import Card from "../ui/Card";
 import classes from "./AddTodo.module.css";
+import { TodoType } from "./TodosList";
 
 interface PropsType {
-  addTodo: (a: { text: string; id: string }) => void;
+  addTodo: (a: TodoType) => void;
   inputError: (a: string) => void;
   addingTodo: () => void;
 }
@@ -22,7 +23,7 @@ const AddTodo = (props: PropsType) => {
 
     fetch("http://localhost:8080/add", {
       method: "POST",
-      body: JSON.stringify({ text: todoTxt }),
+      body: JSON.stringify({ text: todoTxt, completed: false }),
       headers: {
         "Content-Type": "application/json",
       },

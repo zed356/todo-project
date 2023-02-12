@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import Auth from "../store/auth";
+import Auth from "../store/auth-context";
 
 import classes from "./login.module.css";
 

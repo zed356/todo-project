@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Auth from "../store/auth";
+import Auth from "../store/auth-context";
 import Login from "./Login";
 
 interface Props {

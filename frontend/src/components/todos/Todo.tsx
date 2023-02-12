@@ -1,13 +1,12 @@
 import React, { useRef, useState } from "react";
 import classes from "./Todo.module.css";
+import { TodoType } from "./TodosList";
 
 interface Props {
-  todo: {
-    text: string;
-    id: string;
-  };
+  todo: TodoType;
   deleteTodo: (a: string) => void;
-  updateTodo: (a: { id: string; text: string }) => void;
+  updateTodo: (a: TodoType) => void;
+  completeTodo: (a: string) => void;
 }
 
 const Todo = (props: Props) => {
@@ -27,15 +26,22 @@ const Todo = (props: Props) => {
 
   const saveEditHandler = () => {
     if (editedTodoRef.current) {
-      props.updateTodo({ id: props.todo.id, text: editedTodoRef.current.value });
+      props.updateTodo({ ...props.todo, text: editedTodoRef.current.value });
     }
     setEditing(false);
   };
+
+  const completedHandler = () => {
+    props.completeTodo(props.todo.id);
+  };
+
   const todoContent = !editing ? (
     <div className={classes["top-todo-container"]}>
       <span>Date</span>
       <div className={classes.buttons}>
-        <div className={classes.completed}>☑</div>
+        <div className={classes.completed} onClick={completedHandler}>
+          ☑
+        </div>
         <div onClick={editHandler} className={classes.edit}>
           🖊
         </div>

@@ -34,3 +34,10 @@ function App() {
 }
 
 export default App;
+
+/*
+Why typescript types only work with import, not with require()
+
+"emmet.showExpandedAbbreviation": "never" -> default - once vscode ver hits 1.75.1+; fixed global snippets.
+
+*/
