@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import Auth from "../store/auth-context";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 import Login from "./Login";
 
 interface Props {
@@ -7,9 +7,9 @@ interface Props {
 }
 
 const ProtectedRoute = (props: Props): JSX.Element => {
-  const ctx = useContext(Auth);
+  const auth = useSelector((state: RootState) => state.auth.value);
 
-  const content = !ctx.auth ? <Login /> : <>{props.children} </>;
+  const content = !auth ? <Login /> : <>{props.children} </>;
   return content;
 };
 

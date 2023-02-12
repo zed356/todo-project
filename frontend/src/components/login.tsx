@@ -1,16 +1,16 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import Auth from "../store/auth-context";
+import { useDispatch } from "react-redux";
+import { login } from "../store/authSlice";
 
 import classes from "./login.module.css";
 
 const Login = () => {
-  const ctx = useContext(Auth);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const loginHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    ctx.login();
+    dispatch(login());
     navigate("/todos");
   };
 

@@ -1,12 +1,12 @@
 import React from "react";
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Auth from "../store/auth-context";
+import { RootState } from "../store/store";
 import classes from "./navigation.module.css";
 
 const Navigation = () => {
-  const ctx = useContext(Auth);
-  const content = ctx.auth ? (
+  const auth = useSelector((state: RootState) => state.auth.value);
+  const content = auth ? (
     <React.Fragment>
       <Link className={classes["nav-link"]} to="/todos">
         Todos
