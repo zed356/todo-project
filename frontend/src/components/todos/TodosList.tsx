@@ -2,8 +2,11 @@ import Todo from "./Todo";
 import AddTodo from "./AddTodo";
 import classes from "./TodosList.module.css";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Modal from "../ui/Modal";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import { setInitialTodoList, addTodo, deleteTodo, updateTodo } from "../../store/todoListSlice";
+import { RootState } from "../../store/store";
 
 export type TodoType = {
   text: string;
@@ -13,50 +16,42 @@ export type TodoType = {
 };
 
 const TodosList = () => {
-  const [todoList, setTodoList] = useState<TodoType[]>([]);
+  // const [todoList, setTodoList] = useState<TodoType[]>([]);
   const [showErrorModal, setShowErrorModal] = useState({ show: false, error: "" });
   const [isLoading, setIsLoading] = useState(true);
+
+  const dispatch = useDispatch();
+  const todoList = useSelector((state: RootState) => state.todoList.value);
 
   const errorModalHandler = (msg: string) => {
     setShowErrorModal({ show: true, error: msg });
   };
 
-  const todoListHandler = (newTodo: TodoType) => {
-    setTodoList((prev) => {
-      return [...prev, newTodo];
-    });
+  const addTodoHandler = (newTodo: TodoType) => {
+    dispatch(addTodo(newTodo));
   };
 
-  const deleteTodo = (id: string) => {
-    setTodoList((prev) => prev.filter((el) => el.id !== id));
+  const deleteTodoHandler = async (id: string) => {
+    const res = await fetch(`http://localhost:8080/delete/${id}`, { method: "DELETE" });
+    res.status === 204 && dispatch(deleteTodo(id));
   };
 
-  const updateTodoHandler = (updatedTodo: TodoType) => {
-    setTodoList((prev) => {
-      const helperArr = prev;
-      const index = prev.findIndex((el) => el.id === updatedTodo.id);
-      helperArr[index] = updatedTodo;
-      return [...helperArr];
-    });
-    fetch(`http://localhost:8080/update/${updatedTodo.id}`, {
+  const updateTodoHandler = async (updatedTodo: TodoType) => {
+    const res = await fetch(`http://localhost:8080/update/${updatedTodo.id}`, {
       method: "PATCH",
       body: JSON.stringify({ text: updatedTodo.text }),
       headers: {
         "Content-Type": "application/json",
       },
     });
+    res.status === 201 && dispatch(updateTodo(updatedTodo));
   };
 
-  const setTodoCompleted = (id: string) => {
-    setTodoList((prev) => {
-      return prev.map((el) => {
-        if (el.id === id) {
-          fetch(`http://localhost:8080/complete/${el.id}`, { method: "PATCH" });
-          return { ...el, completed: true };
-        }
-        return el;
-      });
+  const setTodoCompleted = async (completedTodo: TodoType) => {
+    const res = await fetch(`http://localhost:8080/complete/${completedTodo.id}`, {
+      method: "PATCH",
     });
+    res.status === 201 && dispatch(updateTodo(completedTodo));
   };
 
   const todoListCheckIfEmpty =
@@ -72,7 +67,7 @@ const TodosList = () => {
               <Todo
                 completeTodo={setTodoCompleted}
                 updateTodo={updateTodoHandler}
-                deleteTodo={deleteTodo}
+                deleteTodo={deleteTodoHandler}
                 todo={el}
                 key={el._id}
               />
@@ -88,15 +83,17 @@ const TodosList = () => {
       })
       .then((data) => {
         if (data) {
-          setTodoList(
-            data.map((el: TodoType) => {
-              return { ...el, id: el._id };
-            })
+          dispatch(
+            setInitialTodoList(
+              data.map((el: TodoType) => {
+                return { ...el, id: el._id };
+              })
+            )
           );
           setIsLoading(false);
         }
       });
-  }, [isLoading]);
+  }, [isLoading, dispatch]);
 
   return (
     <main className={classes.main}>
@@ -106,7 +103,7 @@ const TodosList = () => {
           setIsLoading(true);
         }}
         inputError={errorModalHandler}
-        addTodo={todoListHandler}
+        addTodo={addTodoHandler}
       />
       {todoListCheckIfEmpty}
       {showErrorModal.show && (

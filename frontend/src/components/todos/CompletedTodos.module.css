@@ -1,10 +1,10 @@
 .container {
   display: flex;
-  justify-content: center;
-  margin-top: 4rem;
+  flex-wrap: wrap;
+  margin: 1 rem;
 }
 
-.temp {
-  text-align: center;
-  padding: 0.3rem;
+.todo {
+  width: calc(20% - 1rem);
+  margin: 1rem;
 }

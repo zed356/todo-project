@@ -4,9 +4,9 @@ import { TodoType } from "./TodosList";
 
 interface Props {
   todo: TodoType;
-  deleteTodo: (a: string) => void;
-  updateTodo: (a: TodoType) => void;
-  completeTodo: (a: string) => void;
+  deleteTodo?: (a: string) => void;
+  updateTodo?: (a: TodoType) => void;
+  completeTodo?: (a: TodoType) => void;
 }
 
 const Todo = (props: Props) => {
@@ -14,9 +14,7 @@ const Todo = (props: Props) => {
   const editedTodoRef = useRef<HTMLTextAreaElement>(null);
 
   const deleteTodoHandler = () => {
-    fetch(`http://localhost:8080/delete/${props.todo.id}`, { method: "DELETE" });
-    console.log(props.todo.id);
-    props.deleteTodo(props.todo.id);
+    props.deleteTodo!(props.todo.id);
   };
 
   const editHandler = () => {
@@ -26,13 +24,13 @@ const Todo = (props: Props) => {
 
   const saveEditHandler = () => {
     if (editedTodoRef.current) {
-      props.updateTodo({ ...props.todo, text: editedTodoRef.current.value });
+      props.updateTodo!({ ...props.todo, text: editedTodoRef.current.value });
     }
     setEditing(false);
   };
 
   const completedHandler = () => {
-    props.completeTodo(props.todo.id);
+    props.completeTodo!(props.todo);
   };
 
   const todoContent = !editing ? (
@@ -68,7 +66,6 @@ const Todo = (props: Props) => {
           <textarea ref={editedTodoRef} defaultValue={props.todo.text} />
         )}
       </div>
-      {/* </Card> */}
     </li>
   );
 };

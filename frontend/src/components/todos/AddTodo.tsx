@@ -28,7 +28,7 @@ const AddTodo = (props: PropsType) => {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
+      .then((res) => console.log(res))
       .then((data) => {});
 
     props.addingTodo();
