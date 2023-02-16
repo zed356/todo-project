@@ -18,6 +18,20 @@
   cursor: default;
 }
 
+.nav-link__active {
+  color: aliceblue;
+  width: auto;
+  background-color: cadetblue;
+  display: inline-block;
+  margin: 0.5rem 0rem;
+  margin-right: 0.5rem;
+  border: 4px outset #1c6ea4;
+  border-radius: 25px;
+  padding: 0.2rem 1rem;
+  text-decoration: none;
+  cursor: default;
+}
+
 .nav-link:hover {
   background-color: cadetblue;
 }

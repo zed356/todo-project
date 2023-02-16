@@ -5,6 +5,7 @@ import CompletedTodos from "./components/todos/CompletedTodos";
 import TodosList from "./components/todos/TodosList";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </React.Fragment>
   );
