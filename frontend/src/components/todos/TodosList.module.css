@@ -20,7 +20,34 @@
 }
 
 .empty-todo-msg {
-  margin-top: 4rem;
   padding: 0.5rem;
-  border: 0.25rem solid maroon;
+  border: 0.25rem solid rgb(0, 109, 128);
+}
+
+.bounce {
+  margin-top: 4rem;
+  animation: bounce 2s ease infinite;
+}
+@keyframes bounce {
+  70% {
+    transform: translateY(0%);
+  }
+  80% {
+    transform: translateY(-15%);
+  }
+  90% {
+    transform: translateY(0%);
+  }
+  95% {
+    transform: translateY(-7%);
+  }
+  97% {
+    transform: translateY(0%);
+  }
+  99% {
+    transform: translateY(-3%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }

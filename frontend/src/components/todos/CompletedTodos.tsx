@@ -10,13 +10,15 @@ const CompletedTodos = () => {
         todos.map(
           (el) =>
             el.completed && (
-              <div className={classes.todo} key={el.id}>
+              <div className={classes.swing} key={el.id}>
                 <Todo todo={el} />
               </div>
             )
         )
       ) : (
-        <div className={classes.temp}>Completed Todos.. if there were any..!</div>
+        <div className={classes.swing}>
+          <span>Completed Todos.. if there were any..!</span>
+        </div>
       )}
     </div>
   );

@@ -23,7 +23,9 @@ const TodosList = () => {
   const todoListCheckIfEmpty =
     todoList.length === 0 ? (
       (isLoading && <LoadingSpinner />) || (
-        <p className={classes["empty-todo-msg"]}>Add a todo bish!</p>
+        <div className={classes.bounce}>
+          <span className={classes["empty-todo-msg"]}>Add a todo!</span>
+        </div>
       )
     ) : (
       <ul className={classes["todo-list"]}>
@@ -32,7 +34,6 @@ const TodosList = () => {
     );
 
   useEffect(() => {
-    console.log("i ran");
     fetch("http://localhost:8080/todos")
       .then((res) => {
         return res.json();

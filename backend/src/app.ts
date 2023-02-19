@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import todos from "./routes/todos";
+import auth from "./routes/auth";
 
 const app = express();
 
@@ -15,6 +16,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use(todos);
+
+app.use(auth);
 
 mongoose
   .connect("mongodb+srv://we:we@cluster0.kap9i.mongodb.net/firstproj-todos")

@@ -1,18 +1,17 @@
-.container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
 .form-control {
   display: flex;
+  justify-content: center;
+}
+
+.form-control form {
+  display: flex;
   flex-direction: column;
+  margin-top: 3rem;
   align-items: center;
   width: 11%;
   border: 1px solid rgb(80, 143, 185);
   border-radius: 0.5rem;
   padding: 1rem;
-  margin-top: 3rem;
 }
 
 .form-control input {
@@ -24,9 +23,9 @@
 }
 
 .form-control button {
+  vertical-align: middle;
   margin: auto;
   margin-top: 0.5rem;
-  vertical-align: middle;
   width: 4rem;
   border: 1px solid #1c6ea4;
   border-radius: 0.25rem;
@@ -38,4 +37,8 @@
 
 .form-control button:active {
   background-color: rgb(113, 241, 130);
+}
+
+.error-msg {
+  color: red;
 }

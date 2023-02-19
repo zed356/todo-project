@@ -47,7 +47,14 @@ const AddTodo = (props: PropsType) => {
     <Card>
       <div className={classes.container}>
         <form id="todo" className={classes["form-control"]} onSubmit={submitTodoHandler}>
-          <textarea form="todo" maxLength={50} ref={inputRef} placeholder="todo text" name="todo" />
+          <textarea
+            className={classes.textarea}
+            form="todo"
+            maxLength={50}
+            ref={inputRef}
+            placeholder="todo text"
+            name="todo"
+          />
           <label htmlFor="todo"></label>
           <button type="submit">Create</button>
         </form>

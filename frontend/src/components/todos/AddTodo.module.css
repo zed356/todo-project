@@ -3,22 +3,31 @@
   flex-direction: column;
 }
 
-button {
+.textarea {
+  resize: none;
+}
+
+.textarea:focus {
+  outline: 0.1rem solid #1c6ea4;
+}
+
+.form-control button {
+  vertical-align: middle;
   margin: auto;
-  margin-top: 0.3rem;
+  margin-top: 0.5rem;
   width: 4rem;
   border: 1px solid #1c6ea4;
   border-radius: 0.25rem;
 }
 
-button:hover {
+.form-control button:hover {
   background-color: rgb(172, 250, 181);
 }
 
-textarea {
-  resize: none;
+.form-control button:active {
+  background-color: rgb(110, 165, 117);
 }
 
-textarea:focus {
-  outline: 0.1rem solid #1c6ea4;
+.form-control button:active {
+  background-color: rgb(113, 241, 130);
 }

@@ -17,15 +17,13 @@ const Login = () => {
   return (
     <div className={classes.container}>
       <form onSubmit={loginHandler} className={classes["form-control"]}>
-        <label htmlFor="username" className={classes["form-control__label"]}>
-          Username
-        </label>
-        <input name="username" className={classes["form-control__input"]} type="text" />
-        <label htmlFor="password" className={classes["form-control__label"]}>
+        <label htmlFor="email">E-mail</label>
+        <input name="email" type="text" />
+        <label htmlFor="password" className={classes["form-control--label"]}>
           Password
         </label>
-        <input name="password" className={classes["form-control__input"]} type="password" />
-        <button className={classes["form-control__btn"]}>Login</button>
+        <input name="password" type="password" />
+        <button>Login</button>
       </form>
     </div>
   );
