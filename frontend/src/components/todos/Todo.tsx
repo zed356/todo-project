@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import classes from "./Todo.module.css";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../hooks/hooks";
 import { deleteTodo, updateTodo } from "../../store/todoListSlice";
 
 interface Props {
@@ -21,7 +21,7 @@ const Todo = (props: Props) => {
   const [isHovering, setHovering] = useState(false);
   const editedTodoRef = useRef<HTMLTextAreaElement>(null);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const deleteTodoHandler = async () => {
     const res = await fetch(`http://localhost:8080/delete/${props.todo.id}`, { method: "DELETE" });

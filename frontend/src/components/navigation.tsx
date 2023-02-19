@@ -1,11 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../hooks/hooks";
 import { NavLink } from "react-router-dom";
-import { RootState } from "../store/store";
 import classes from "./navigation.module.css";
 
 const Navigation = () => {
-  const auth = useSelector((state: RootState) => state.auth.value);
+  const auth = useAppSelector((state) => state.auth.isAuth);
   const content = auth ? (
     <React.Fragment>
       <NavLink

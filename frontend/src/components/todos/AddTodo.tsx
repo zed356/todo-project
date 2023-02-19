@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import Card from "../ui/Card";
 import classes from "./AddTodo.module.css";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../hooks/hooks";
 import { addTodo } from "../../store/todoListSlice";
 
 interface PropsType {
@@ -11,7 +11,7 @@ interface PropsType {
 
 const AddTodo = (props: PropsType) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const submitTodoHandler = async (event: React.FormEvent) => {
     event.preventDefault();

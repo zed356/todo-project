@@ -1,10 +1,9 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { useAppSelector } from "../../hooks/hooks";
 import classes from "./CompletedTodos.module.css";
 import Todo from "./Todo";
 
 const CompletedTodos = () => {
-  const todos = useSelector((state: RootState) => state.todoList.value);
+  const todos = useAppSelector((state) => state.todoList.value);
   return (
     <div className={classes.container}>
       {todos.length ? (

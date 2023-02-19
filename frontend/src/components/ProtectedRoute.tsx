@@ -7,7 +7,7 @@ interface Props {
 }
 
 const ProtectedRoute = (props: Props): JSX.Element => {
-  const auth = useSelector((state: RootState) => state.auth.value);
+  const auth = useSelector((state: RootState) => state.auth.isAuth);
 
   const content = !auth ? <Login /> : <>{props.children} </>;
   return content;

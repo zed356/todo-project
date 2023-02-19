@@ -2,19 +2,19 @@ import Todo from "./Todo";
 import AddTodo from "./AddTodo";
 import classes from "./TodosList.module.css";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import Modal from "../ui/Modal";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { setInitialTodoList } from "../../store/todoListSlice";
-import { RootState } from "../../store/store";
-import { TodoType } from "./Todo";
+
+import type { TodoType } from "./Todo";
 
 const TodosList = () => {
   const [showErrorModal, setShowErrorModal] = useState({ show: false, error: "" });
   const [isLoading, setIsLoading] = useState(true);
 
-  const dispatch = useDispatch();
-  const todoList = useSelector((state: RootState) => state.todoList.value);
+  const dispatch = useAppDispatch();
+  const todoList = useAppSelector((state) => state.todoList.value);
 
   const errorModalHandler = (msg: string) => {
     setShowErrorModal({ show: true, error: msg });
