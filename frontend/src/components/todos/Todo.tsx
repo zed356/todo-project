@@ -1,20 +1,42 @@
 import { useRef, useState } from "react";
 import classes from "./Todo.module.css";
-import { TodoType } from "./TodosList";
+import { useDispatch } from "react-redux";
+import { deleteTodo, updateTodo } from "../../store/todoListSlice";
 
 interface Props {
   todo: TodoType;
-  deleteTodo?: (a: string) => void;
-  updateTodo?: (a: TodoType) => void;
 }
+
+export type TodoType = {
+  _id?: string;
+  text: string;
+  id: string;
+  completed: boolean;
+  date: string;
+  completedDate?: string;
+};
 
 const Todo = (props: Props) => {
   const [editing, setEditing] = useState(false);
   const [isHovering, setHovering] = useState(false);
   const editedTodoRef = useRef<HTMLTextAreaElement>(null);
 
-  const deleteTodoHandler = () => {
-    props.deleteTodo!(props.todo.id);
+  const dispatch = useDispatch();
+
+  const deleteTodoHandler = async () => {
+    const res = await fetch(`http://localhost:8080/delete/${props.todo.id}`, { method: "DELETE" });
+    res.status === 204 && dispatch(deleteTodo(props.todo.id));
+  };
+
+  const updateTodoHandler = async (updatedTodo: TodoType) => {
+    const res = await fetch(`http://localhost:8080/update/${updatedTodo.id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ text: updatedTodo.text, completed: updatedTodo.completed }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    res.status === 201 && dispatch(updateTodo(updatedTodo));
   };
 
   const editHandler = () => {
@@ -23,32 +45,32 @@ const Todo = (props: Props) => {
 
   const saveEditHandler = () => {
     if (editedTodoRef.current) {
-      props.updateTodo!({ ...props.todo, text: editedTodoRef.current.value });
+      updateTodoHandler({ ...props.todo, text: editedTodoRef.current.value });
     }
-    console.log(props.todo.date);
     setEditing(false);
   };
 
   const completedHandler = () => {
     if (props.todo.completed) {
-      props.updateTodo!({ ...props.todo, completed: false });
+      updateTodoHandler({ ...props.todo, completed: false });
     } else {
-      props.updateTodo!({ ...props.todo, completed: true });
+      updateTodoHandler({ ...props.todo, completed: true, completedDate: new Date().toString() });
     }
   };
 
-  const todoDate = new Date(props.todo.date);
-  const dateString = `${("0" + todoDate.getDate()).slice(-2)}/${(
-    "0" +
-    (todoDate.getMonth() + 1)
-  ).slice(-2)}/${todoDate
-    .getFullYear()
-    .toString()
-    .slice(2)} ${todoDate.getHours()}:${todoDate.getMinutes()}`;
+  // const todoDate = new Date(props.todo.date);
+  const dateString = (dates: string) => {
+    const todoDate = new Date(dates);
+    return `${("0" + todoDate.getDate()).slice(-2)}/${("0" + (todoDate.getMonth() + 1)).slice(
+      -2
+    )}/${todoDate.getFullYear().toString().slice(2)} ${("0" + todoDate.getHours()).slice(-2)}:${(
+      "0" + todoDate.getMinutes()
+    ).slice(-2)}`;
+  };
 
   const todoIfNotCompleted = !editing ? (
     <div className={classes["top-todo-container"]}>
-      <span>{dateString}</span>
+      <span>{dateString(props.todo.date)}</span>
       <div className={classes.buttons}>
         <div className={classes.completed} onClick={completedHandler}>
           ☑
@@ -71,7 +93,9 @@ const Todo = (props: Props) => {
 
   const todoIfCompleted = (
     <div className={classes["top-todo-container"]}>
-      <span>{dateString}</span>
+      <span>
+        {dateString(props.todo.date)} {"-->"} {dateString(props.todo.completedDate!)}
+      </span>
       <div className={classes.buttons}>
         <div
           className={classes["if-completed"]}
@@ -91,7 +115,7 @@ const Todo = (props: Props) => {
   return (
     <li className={classes["list-item"]}>
       <div className={classes.todo}>
-        {!props.todo.completed ? todoIfNotCompleted : todoIfCompleted}
+        {props.todo.completed ? todoIfCompleted : todoIfNotCompleted}
         {!editing ? (
           <p>{props.todo.text}</p>
         ) : (

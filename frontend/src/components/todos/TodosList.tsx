@@ -5,16 +5,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../ui/Modal";
 import LoadingSpinner from "../ui/LoadingSpinner";
-import { setInitialTodoList, addTodo, deleteTodo, updateTodo } from "../../store/todoListSlice";
+import { setInitialTodoList } from "../../store/todoListSlice";
 import { RootState } from "../../store/store";
-
-export type TodoType = {
-  _id?: string;
-  text: string;
-  id: string;
-  completed: boolean;
-  date: Date;
-};
+import { TodoType } from "./Todo";
 
 const TodosList = () => {
   const [showErrorModal, setShowErrorModal] = useState({ show: false, error: "" });
@@ -27,26 +20,6 @@ const TodosList = () => {
     setShowErrorModal({ show: true, error: msg });
   };
 
-  const addTodoHandler = (newTodo: TodoType) => {
-    dispatch(addTodo(newTodo));
-  };
-
-  const deleteTodoHandler = async (id: string) => {
-    const res = await fetch(`http://localhost:8080/delete/${id}`, { method: "DELETE" });
-    res.status === 204 && dispatch(deleteTodo(id));
-  };
-
-  const updateTodoHandler = async (updatedTodo: TodoType) => {
-    const res = await fetch(`http://localhost:8080/update/${updatedTodo.id}`, {
-      method: "PATCH",
-      body: JSON.stringify({ text: updatedTodo.text, completed: updatedTodo.completed }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    res.status === 201 && dispatch(updateTodo(updatedTodo));
-  };
-
   const todoListCheckIfEmpty =
     todoList.length === 0 ? (
       (isLoading && <LoadingSpinner />) || (
@@ -54,21 +27,12 @@ const TodosList = () => {
       )
     ) : (
       <ul className={classes["todo-list"]}>
-        {todoList.map(
-          (el) =>
-            !el.completed && (
-              <Todo
-                updateTodo={updateTodoHandler}
-                deleteTodo={deleteTodoHandler}
-                todo={el}
-                key={el._id}
-              />
-            )
-        )}
+        {todoList.map((el) => !el.completed && <Todo todo={el} key={el.id} />)}
       </ul>
     );
 
   useEffect(() => {
+    console.log("i ran");
     fetch("http://localhost:8080/todos")
       .then((res) => {
         return res.json();
@@ -85,7 +49,7 @@ const TodosList = () => {
           setIsLoading(false);
         }
       });
-  }, [isLoading, dispatch]);
+  }, [dispatch]);
 
   return (
     <main className={classes.main}>
@@ -95,7 +59,6 @@ const TodosList = () => {
           setIsLoading(true);
         }}
         inputError={errorModalHandler}
-        addTodo={addTodoHandler}
       />
       {todoListCheckIfEmpty}
       {showErrorModal.show && (

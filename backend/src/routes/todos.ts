@@ -4,14 +4,9 @@ import mongoose from "mongoose";
 
 import Todo from "../models/todo";
 import User from "../models/user";
+import { TodoType } from "../models/todo";
 
 const router = express.Router();
-
-interface TodoType {
-  text: string;
-  completed: boolean;
-  date: Date;
-}
 
 router.get("/todos", (req: Request, res: Response, next: NextFunction) => {
   Todo.find({}).then((todoRes: TodoType[]) => {
@@ -24,13 +19,15 @@ router.post("/add", async (req: Request, res: Response, next: NextFunction) => {
   newTodo.text = req.body.text;
   newTodo.completed = req.body.completed;
   newTodo.date = req.body.date;
-  await newTodo.save();
+  newTodo.save().then(() => {
+    res.status(201).json({ msg: "Successfully created a todo!", newTodo });
+  });
 });
 
 router.delete("/delete/:todoId", (req: Request, res: Response, next: NextFunction) => {
   const targetId = new mongoose.Types.ObjectId(req.params.todoId);
   Todo.deleteOne({ _id: targetId }).then(() => {
-    res.status(204).send({ msg: "Successfully deleted!" });
+    res.status(204).json({ msg: "Successfully deleted!" });
   });
 });
 
@@ -40,7 +37,7 @@ router.patch("/update/:todoId", (req: Request, res: Response, next: NextFunction
   Todo.findOneAndUpdate(
     { _id: targetId },
     { text: req.body.text, completed: req.body.completed }
-  ).then(() => res.status(201).send({ msg: "Successfully updated!" }));
+  ).then(() => res.status(201).json({ msg: "Successfully updated!" }));
 });
 
 export default router;
