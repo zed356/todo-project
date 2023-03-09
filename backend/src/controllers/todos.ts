@@ -13,7 +13,7 @@ const addTodo = async (req: Request, res: Response, next: NextFunction) => {
   const newTodo = new Todo();
   newTodo.text = req.body.text;
   newTodo.completed = req.body.completed;
-  newTodo.date = req.body.date;
+  newTodo.dateCreated = req.body.dateCreated;
   newTodo.save().then(() => {
     res.status(201).json({ msg: "Successfully created a todo!", newTodo });
   });
@@ -29,9 +29,10 @@ const deleteTodo = (req: Request, res: Response, next: NextFunction) => {
 const updateTodo = (req: Request, res: Response, next: NextFunction) => {
   const targetId = new mongoose.Types.ObjectId(req.params.todoId);
 
+  console.log(req.body);
   Todo.findOneAndUpdate(
     { _id: targetId },
-    { text: req.body.text, completed: req.body.completed }
+    { text: req.body.text, completed: req.body.completed, dateCompleted: req.body.dateCompleted }
   ).then(() => res.status(201).json({ msg: "Successfully updated!" }));
 };
 

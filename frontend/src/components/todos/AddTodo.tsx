@@ -24,7 +24,7 @@ const AddTodo = (props: PropsType) => {
 
     const res = await fetch("http://localhost:8080/add", {
       method: "POST",
-      body: JSON.stringify({ text: todoTxt, completed: false, date: new Date() }),
+      body: JSON.stringify({ text: todoTxt, completed: false, dateCreated: new Date() }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -36,7 +36,7 @@ const AddTodo = (props: PropsType) => {
           id: data.newTodo._id,
           text: data.newTodo.text,
           completed: false,
-          date: data.newTodo.date,
+          dateCreated: data.newTodo.dateCreated,
         })
       );
 

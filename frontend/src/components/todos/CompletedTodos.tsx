@@ -4,13 +4,15 @@ import Todo from "./Todo";
 
 const CompletedTodos = () => {
   const todos = useAppSelector((state) => state.todoList.value);
+  const completedTodoList = todos.filter((el) => el.completed);
+  console.log(completedTodoList);
   return (
     <div className={classes.container}>
-      {todos.length ? (
-        todos.map(
+      {completedTodoList.length ? (
+        completedTodoList.map(
           (el) =>
             el.completed && (
-              <div className={classes.swing} key={el.id}>
+              <div className={classes.todo} key={el.id}>
                 <Todo todo={el} />
               </div>
             )

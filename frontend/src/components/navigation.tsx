@@ -24,7 +24,7 @@ const Navigation = () => {
     <Fragment>
       <NavLink
         className={({ isActive }) => (isActive ? classes["nav-link__active"] : classes["nav-link"])}
-        to="/"
+        to="/login"
       >
         Login
       </NavLink>

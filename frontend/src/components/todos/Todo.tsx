@@ -12,8 +12,8 @@ export type TodoType = {
   text: string;
   id: string;
   completed: boolean;
-  date: string;
-  completedDate?: string;
+  dateCreated: string;
+  dateCompleted?: string;
 };
 
 const Todo = (props: Props) => {
@@ -31,7 +31,11 @@ const Todo = (props: Props) => {
   const updateTodoHandler = async (updatedTodo: TodoType) => {
     const res = await fetch(`http://localhost:8080/update/${updatedTodo.id}`, {
       method: "PATCH",
-      body: JSON.stringify({ text: updatedTodo.text, completed: updatedTodo.completed }),
+      body: JSON.stringify({
+        text: updatedTodo.text,
+        completed: updatedTodo.completed,
+        dateCompleted: updatedTodo.dateCompleted,
+      }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -54,7 +58,7 @@ const Todo = (props: Props) => {
     if (props.todo.completed) {
       updateTodoHandler({ ...props.todo, completed: false });
     } else {
-      updateTodoHandler({ ...props.todo, completed: true, completedDate: new Date().toString() });
+      updateTodoHandler({ ...props.todo, completed: true, dateCompleted: new Date().toString() });
     }
   };
 
@@ -70,7 +74,7 @@ const Todo = (props: Props) => {
 
   const todoIfNotCompleted = !editing ? (
     <div className={classes["top-todo-container"]}>
-      <span>{dateString(props.todo.date)}</span>
+      <span>{dateString(props.todo.dateCreated)}</span>
       <div className={classes.buttons}>
         <div className={classes.completed} onClick={completedHandler}>
           ☑
@@ -94,7 +98,7 @@ const Todo = (props: Props) => {
   const todoIfCompleted = (
     <div className={classes["top-todo-container"]}>
       <span>
-        {dateString(props.todo.date)} {"-->"} {dateString(props.todo.completedDate!)}
+        {dateString(props.todo.dateCreated)} {"-->"} {dateString(props.todo.dateCompleted!)}
       </span>
       <div className={classes.buttons}>
         <div

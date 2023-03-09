@@ -43,7 +43,6 @@ const Register = () => {
         "Content-Type": "application/json",
       },
     });
-    const data = await res.json();
 
     if (res.status === 201) {
       navigate("/");
