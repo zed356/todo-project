@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
-import TodosList from "./todos/TodosList";
+import { RootState } from "../../store/store";
+import TodosList from "../todos/TodosList";
 
 interface Props {
   children: JSX.Element | JSX.Element[];

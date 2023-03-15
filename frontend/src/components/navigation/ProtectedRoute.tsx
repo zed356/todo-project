@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
-import Login from "./Login";
+import { RootState } from "../../store/store";
+import Login from "../user/Login";
 
 interface Props {
   children: JSX.Element | JSX.Element[];

@@ -1,13 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/navigation/Navigation";
 import CompletedTodos from "./components/todos/CompletedTodos";
 import TodosList from "./components/todos/TodosList";
-import Login from "./components/Login";
-import ProtectedRoute from "./components/ProtectedRoute";
-import PageNotFound from "./components/PageNotFound";
-import Register from "./components/Register";
-import NotLoggedInRoute from "./components/NotLoggedInRoute";
+import Login from "./components/user/Login";
+import ProtectedRoute from "./components/navigation/ProtectedRoute";
+import PageNotFound from "./components/navigation/PageNotFound";
+import Register from "./components/user/Register";
+import NotLoggedInRoute from "./components/navigation/NotLoggedInRoute";
 
 function App() {
   return (

@@ -1,0 +1,11 @@
+// Added to fix automatic import path updates when moving files around.
+// https://github.com/microsoft/vscode/issues/66937#issuecomment-475087628
+
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2016",
+    "jsx": "preserve"
+  },
+  "exclude": ["node_modules", "**/node_modules/*"]
+}
