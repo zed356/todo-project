@@ -22,6 +22,7 @@
 .empty-todo-msg {
   padding: 0.5rem;
   border: 0.25rem solid rgb(0, 109, 128);
+  border-radius: 0.25rem;
 }
 
 .bounce {

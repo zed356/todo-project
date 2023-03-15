@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/navigation/ProtectedRoute";
 import PageNotFound from "./components/navigation/PageNotFound";
 import Register from "./components/user/Register";
 import NotLoggedInRoute from "./components/navigation/NotLoggedInRoute";
+import Logout from "components/user/Logout";
 
 function App() {
   return (
@@ -46,6 +47,14 @@ function App() {
           element={
             <ProtectedRoute>
               <CompletedTodos />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/logout"
+          element={
+            <ProtectedRoute>
+              <Logout />
             </ProtectedRoute>
           }
         />

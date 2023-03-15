@@ -1,0 +1,22 @@
+.logoutButton {
+  color: aliceblue;
+  width: auto;
+  background-color: rgb(80, 143, 185);
+  display: inline-block;
+  margin: 0.5rem 0rem;
+  margin-right: 0.5rem;
+  border: 4px outset #1c6ea4;
+  border-radius: 25px;
+  padding: 0.2rem 1rem;
+  text-decoration: none;
+  cursor: default;
+  font-size: 0.9rem;
+}
+
+.logoutButton:hover {
+  background-color: rgb(197, 146, 146);
+}
+
+.logoutButton:active {
+  background-color: rgb(255, 69, 69);
+}

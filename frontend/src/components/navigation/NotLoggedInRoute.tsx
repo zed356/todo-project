@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { RootState } from "../../store/store";
-import TodosList from "../todos/TodosList";
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -8,8 +9,13 @@ interface Props {
 
 const NotLoggedInRoute = (props: Props) => {
   const auth = useSelector((state: RootState) => state.auth.isAuth);
-  const content = auth ? <TodosList /> : <>{props.children}</>;
-  return content;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    auth && navigate("/todos");
+  }, [auth, navigate]);
+
+  return <>{props.children}</>;
 };
 
 export default NotLoggedInRoute;

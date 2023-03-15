@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { RootState } from "../../store/store";
-import Login from "../user/Login";
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -8,9 +9,13 @@ interface Props {
 
 const ProtectedRoute = (props: Props): JSX.Element => {
   const auth = useSelector((state: RootState) => state.auth.isAuth);
+  const navigate = useNavigate();
 
-  const content = !auth ? <Login /> : <>{props.children} </>;
-  return content;
+  useEffect(() => {
+    !auth && navigate("/login");
+  }, [auth, navigate]);
+
+  return <>{props.children}</>;
 };
 
 export default ProtectedRoute;

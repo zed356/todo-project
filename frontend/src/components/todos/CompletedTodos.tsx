@@ -5,7 +5,6 @@ import Todo from "./Todo";
 const CompletedTodos = () => {
   const todos = useAppSelector((state) => state.todoList.value);
   const completedTodoList = todos.filter((el) => el.completed);
-  console.log(completedTodoList);
   return (
     <div className={classes.container}>
       {completedTodoList.length ? (

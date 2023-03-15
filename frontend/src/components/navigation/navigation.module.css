@@ -32,8 +32,20 @@
   cursor: default;
 }
 
+.nav-link__hidden {
+  display: none;
+}
+
 .nav-link:hover {
   background-color: cadetblue;
+}
+
+.nav-link__logout:hover {
+  background-color: rgb(197, 146, 146);
+}
+
+.nav-link__logout:active {
+  background-color: rgb(255, 69, 69);
 }
 
 .container {
