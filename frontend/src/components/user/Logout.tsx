@@ -9,14 +9,14 @@ const Logout = () => {
   const auth = useSelector((state: RootState) => state.auth.isAuth);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const logoutHandler = () => {
     if (auth) {
       dispatch(logout());
       navigate("/");
     }
-  }, [auth, dispatch, navigate]);
+  };
 
-  return <></>;
+  return <div onClick={logoutHandler}>Logout</div>;
 };
 
 export default Logout;

@@ -1,12 +1,20 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/authSlice";
 
 import classes from "./login.module.css";
+import { useEffect } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname !== "/login") {
+      navigate("/login");
+    }
+  });
 
   const loginHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();

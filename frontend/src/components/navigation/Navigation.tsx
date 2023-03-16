@@ -20,9 +20,12 @@ const Navigation = () => {
       >
         Completed
       </NavLink>
-      <NavLink className={`${classes["nav-link"]} ${classes["nav-link__logout"]}`} to="/logout">
+      {/* <NavLink className={`${classes["nav-link"]} ${classes["nav-link__logout"]}`} to="/logout">
         Logout
-      </NavLink>
+      </NavLink> */}
+      <section className={`${classes["nav-link"]} ${classes["nav-link__logout"]}`}>
+        <Logout />
+      </section>
     </Fragment>
   ) : (
     <Fragment>
