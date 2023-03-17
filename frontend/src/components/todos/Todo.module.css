@@ -36,11 +36,20 @@
   height: auto;
   word-wrap: break-word;
   white-space: pre-wrap;
+  overflow: hidden;
 }
 
 .todo p {
   margin-top: 0.3rem;
   margin-bottom: 0.5rem;
+}
+
+.todo textarea {
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  resize: none;
+  box-sizing: border-box;
 }
 
 .delete {

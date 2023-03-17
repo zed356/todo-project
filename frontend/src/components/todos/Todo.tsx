@@ -48,8 +48,10 @@ const Todo = (props: Props) => {
   };
 
   const saveEditHandler = () => {
-    if (editedTodoRef.current) {
-      updateTodoHandler({ ...props.todo, text: editedTodoRef.current.value });
+    if (editedTodoRef.current!.value) {
+      updateTodoHandler({ ...props.todo, text: editedTodoRef.current!.value });
+    } else {
+      deleteTodoHandler();
     }
     setEditing(false);
   };

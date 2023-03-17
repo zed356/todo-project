@@ -19,13 +19,13 @@ const Register = () => {
     const confirmedPassword = confirmPasswordInputRef.current!.value;
 
     if (!email.includes("@") || email.trim().length < 6) {
-      setEmailErrorMsg("Please enter a valid email!");
+      setEmailErrorMsg("Please enter a valid email");
       return;
     }
     if (password !== confirmedPassword) {
-      setPasswordErrorMsg("Passwords must match!");
+      setPasswordErrorMsg("Passwords must match");
     } else if (password.trim().length < 4 || confirmedPassword.trim().length < 4) {
-      setPasswordErrorMsg("Password length must be at least 4 characters!");
+      setPasswordErrorMsg("Password length must be at least 4 characters");
       return;
     }
     setEmailErrorMsg("");

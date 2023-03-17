@@ -28,8 +28,6 @@ const deleteTodo = (req: Request, res: Response, next: NextFunction) => {
 
 const updateTodo = (req: Request, res: Response, next: NextFunction) => {
   const targetId = new mongoose.Types.ObjectId(req.params.todoId);
-
-  console.log(req.body);
   Todo.findOneAndUpdate(
     { _id: targetId },
     { text: req.body.text, completed: req.body.completed, dateCompleted: req.body.dateCompleted }
