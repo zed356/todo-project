@@ -1,6 +1,7 @@
+import { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../../store/authSlice";
+import { login } from "../../authSlice";
 
 import classes from "./login.module.css";
 import { useEffect } from "react";
@@ -9,6 +10,9 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
+  const [inputErrorMsg, setInputErrorMsg] = useState("");
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (location.pathname !== "/login") {
@@ -16,21 +20,45 @@ const Login = () => {
     }
   });
 
-  const loginHandler = (e: React.SyntheticEvent) => {
+  const loginHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    dispatch(login());
-    navigate("/todos");
+    const email = emailInputRef.current!.value || "";
+    const password = passwordInputRef.current!.value || "";
+    setInputErrorMsg("");
+
+    if (!email.includes("@") || email.trim().length < 6) {
+      return setInputErrorMsg("Please enter a valid email");
+    }
+    if (password.trim().length < 4) {
+      return setInputErrorMsg("Password length must be at least 4 characters");
+    }
+
+    const res = await fetch("http://localhost:8080/login", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(res.status);
+    if (res.status === 401) {
+      return setInputErrorMsg("Please enter valid login credentials");
+    } else if (res.status === 200) {
+      dispatch(login());
+      navigate("/todos");
+    }
   };
 
   return (
     <div className={classes.container}>
       <form onSubmit={loginHandler} className={classes["form-control"]}>
         <label htmlFor="email">E-mail</label>
-        <input name="email" type="text" />
+        <input ref={emailInputRef} name="email" type="text" />
         <label htmlFor="password" className={classes["form-control--label"]}>
           Password
         </label>
-        <input name="password" type="password" />
+        <input ref={passwordInputRef} name="password" type="password" />
+        <section className={classes["form-control__error-msg"]}>{inputErrorMsg}</section>
         <button>Login</button>
       </form>
     </div>

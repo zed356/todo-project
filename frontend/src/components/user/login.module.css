@@ -39,3 +39,10 @@
 .form-control button:active {
   background-color: rgb(113, 241, 130);
 }
+
+.form-control__error-msg {
+  margin-top: 0.5rem;
+  color: red;
+  display: flex;
+  flex-direction: column;
+}

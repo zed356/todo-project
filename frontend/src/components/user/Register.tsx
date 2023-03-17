@@ -19,17 +19,13 @@ const Register = () => {
     const confirmedPassword = confirmPasswordInputRef.current!.value;
 
     if (!email.includes("@") || email.trim().length < 6) {
-      setEmailErrorMsg("Please enter a valid email");
-      return;
+      return setEmailErrorMsg("Please enter a valid email");
     }
     if (password !== confirmedPassword) {
       setPasswordErrorMsg("Passwords must match");
     } else if (password.trim().length < 4 || confirmedPassword.trim().length < 4) {
-      setPasswordErrorMsg("Password length must be at least 4 characters");
-      return;
+      return setPasswordErrorMsg("Password length must be at least 4 characters");
     }
-    setEmailErrorMsg("");
-    setPasswordErrorMsg("");
 
     const user = {
       email,
@@ -44,9 +40,20 @@ const Register = () => {
       },
     });
 
+    const data = await res.json();
+
     if (res.status === 201) {
       navigate("/");
+    } else if (res.status === 400) {
+      const param = data.errors[0].param;
+      if (param === "password") {
+        return setPasswordErrorMsg("Please enter matching passwords, min 4 characters");
+      } else if (param === "email") {
+        return setEmailErrorMsg("Please enter a valid email address!");
+      }
     }
+    setEmailErrorMsg("");
+    setPasswordErrorMsg("");
   };
 
   return (
