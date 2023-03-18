@@ -6,8 +6,8 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import Modal from "../ui/Modal";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { setInitialTodoList } from "../../store/todoListSlice";
-
 import type { TodoType } from "./Todo";
+import { logout } from "store/authSlice";
 
 const TodosList = () => {
   const [showErrorModal, setShowErrorModal] = useState({ show: false, error: "" });
@@ -35,24 +35,26 @@ const TodosList = () => {
     );
 
   useEffect(() => {
-    fetch("http://localhost:8080/todos", {
-      headers: authHeader,
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        if (data) {
-          dispatch(
-            setInitialTodoList(
-              data.map((el: TodoType) => {
-                return { ...el, id: el._id };
-              })
-            )
-          );
-          setIsLoading(false);
-        }
+    const fetchData = async () => {
+      const res = await fetch("http://localhost:8080/todos", {
+        headers: authHeader,
       });
+      if (res.status === 200) {
+        const data = await res.json();
+        dispatch(
+          setInitialTodoList(
+            data.map((el: TodoType) => {
+              return { ...el, id: el._id };
+            })
+          )
+        );
+        setIsLoading(false);
+      } else {
+        dispatch(logout());
+      }
+    };
+
+    fetchData();
   }, [dispatch, authHeader]);
 
   return (

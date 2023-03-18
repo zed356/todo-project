@@ -3,7 +3,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 declare module "express" {
   interface Request {
-    user?: string | JwtPayload;
+    userId?: string;
   }
 }
 
@@ -13,8 +13,8 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     return res.status(403).send("A token is required for authentication");
   }
   try {
-    const decoded = jwt.verify(token, "secret");
-    req.user = decoded;
+    const decoded = jwt.verify(token, "secret") as JwtPayload;
+    req.userId = decoded.userId;
   } catch (err) {
     return res.status(401).send("Invalid Token");
   }

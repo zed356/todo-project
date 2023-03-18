@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
 
 const getTodos = (req: Request, res: Response, next: NextFunction) => {
-  Todo.find({}).then((todoRes: TodoType[]) => {
+  Todo.find({ userId: req.userId }).then((todoRes: TodoType[]) => {
     res.send(todoRes);
   });
 };
@@ -14,6 +14,7 @@ const addTodo = async (req: Request, res: Response, next: NextFunction) => {
   newTodo.text = req.body.text;
   newTodo.completed = req.body.completed;
   newTodo.dateCreated = req.body.dateCreated;
+  newTodo.userId = new mongoose.Types.ObjectId(req.userId);
   newTodo.save().then(() => {
     res.status(201).json({ msg: "Successfully created a todo!", newTodo });
   });
