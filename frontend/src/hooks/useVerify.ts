@@ -6,7 +6,6 @@ const useVerify = async () => {
   const jwt = localStorage.getItem("jwt");
   if (jwt) {
     const parsedJwt = JSON.parse(jwt);
-    console.log(parsedJwt);
     const res = await fetch("http://localhost:8080/todos", {
       headers: {
         "x-access-token": parsedJwt,
