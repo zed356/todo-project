@@ -3,6 +3,8 @@ import Card from "../ui/Card";
 import classes from "./AddTodo.module.css";
 import { useAppDispatch } from "../../hooks/hooks";
 import { addTodo } from "../../store/todoListSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "store/store";
 
 interface PropsType {
   inputError: (a: string) => void;
@@ -12,6 +14,7 @@ interface PropsType {
 const AddTodo = (props: PropsType) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useAppDispatch();
+  const authHeader = useSelector((state: RootState) => state.auth.authHeader);
 
   const submitTodoHandler = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -27,6 +30,7 @@ const AddTodo = (props: PropsType) => {
       body: JSON.stringify({ text: todoTxt, completed: false, dateCreated: new Date() }),
       headers: {
         "Content-Type": "application/json",
+        ...authHeader,
       },
     });
     const data = await res.json();

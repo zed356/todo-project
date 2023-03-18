@@ -51,6 +51,8 @@ const Register = () => {
       } else if (param === "email") {
         return setEmailErrorMsg("Please enter a valid email address!");
       }
+    } else if (res.status === 401) {
+      return setEmailErrorMsg("Email already in use");
     }
     setEmailErrorMsg("");
     setPasswordErrorMsg("");

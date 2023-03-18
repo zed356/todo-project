@@ -1,18 +1,16 @@
 import express from "express";
-import { NextFunction, Request, Response } from "express";
-import mongoose from "mongoose";
-
-import User from "../models/user";
 import todoController from "../controllers/todos";
+import { body } from "express-validator";
+import authJwt from "../middlewares/authJwt";
 
 const router = express.Router();
 
-router.get("/todos", todoController.getTodos);
+router.get("/todos", authJwt.verifyToken, todoController.getTodos);
 
-router.post("/add", todoController.addTodo);
+router.post("/add", authJwt.verifyToken, body("text").trim(), todoController.addTodo);
 
-router.delete("/delete/:todoId", todoController.deleteTodo);
+router.delete("/delete/:todoId", authJwt.verifyToken, todoController.deleteTodo);
 
-router.patch("/update/:todoId", todoController.updateTodo);
+router.patch("/update/:todoId", authJwt.verifyToken, todoController.updateTodo);
 
 export default router;

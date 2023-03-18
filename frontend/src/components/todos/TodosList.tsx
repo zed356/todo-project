@@ -15,6 +15,7 @@ const TodosList = () => {
 
   const dispatch = useAppDispatch();
   const todoList = useAppSelector((state) => state.todoList.value);
+  const authHeader = useAppSelector((state) => state.auth.authHeader);
 
   const errorModalHandler = (msg: string) => {
     setShowErrorModal({ show: true, error: msg });
@@ -34,7 +35,9 @@ const TodosList = () => {
     );
 
   useEffect(() => {
-    fetch("http://localhost:8080/todos")
+    fetch("http://localhost:8080/todos", {
+      headers: authHeader,
+    })
       .then((res) => {
         return res.json();
       })
@@ -50,7 +53,7 @@ const TodosList = () => {
           setIsLoading(false);
         }
       });
-  }, [dispatch]);
+  }, [dispatch, authHeader]);
 
   return (
     <main className={classes.main}>

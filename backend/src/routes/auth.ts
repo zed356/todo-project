@@ -1,6 +1,7 @@
 import express from "express";
 import { body } from "express-validator";
 import authController from "../controllers/auth";
+import authJwt from "../middlewares/authJwt";
 
 const router = express.Router();
 
@@ -17,5 +18,7 @@ router.post(
   body("password").trim().isLength({ min: 4 }),
   authController.loginUser
 );
+
+router.post("/verify", authJwt.verifyToken);
 
 export default router;

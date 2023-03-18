@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navigation from "./components/navigation/Navigation";
 import CompletedTodos from "./components/todos/CompletedTodos";
@@ -9,8 +9,14 @@ import PageNotFound from "./components/navigation/PageNotFound";
 import Register from "./components/user/Register";
 import NotLoggedInRoute from "./components/navigation/NotLoggedInRoute";
 import Logout from "components/user/Logout";
+import useVerify from "hooks/useVerify";
+import { useSelector } from "react-redux";
+import { RootState } from "store/store";
 
 function App() {
+  useVerify();
+  const auth = useSelector((state: RootState) => state.auth.isAuth);
+  console.log(auth);
   return (
     <React.Fragment>
       <Navigation />

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../../authSlice";
+import { login } from "../../store/authSlice";
 
 import classes from "./login.module.css";
 import { useEffect } from "react";
@@ -40,11 +40,11 @@ const Login = () => {
         "Content-Type": "application/json",
       },
     });
-    console.log(res.status);
     if (res.status === 401) {
       return setInputErrorMsg("Please enter valid login credentials");
     } else if (res.status === 200) {
-      dispatch(login());
+      const data = await res.json();
+      dispatch(login(data.token));
       navigate("/todos");
     }
   };

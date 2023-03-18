@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import classes from "./Todo.module.css";
 import { useAppDispatch } from "../../hooks/hooks";
 import { deleteTodo, updateTodo } from "../../store/todoListSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "store/store";
 
 interface Props {
   todo: TodoType;
@@ -22,9 +24,13 @@ const Todo = (props: Props) => {
   const editedTodoRef = useRef<HTMLTextAreaElement>(null);
 
   const dispatch = useAppDispatch();
+  const authHeader = useSelector((state: RootState) => state.auth.authHeader);
 
   const deleteTodoHandler = async () => {
-    const res = await fetch(`http://localhost:8080/delete/${props.todo.id}`, { method: "DELETE" });
+    const res = await fetch(`http://localhost:8080/delete/${props.todo.id}`, {
+      method: "DELETE",
+      headers: authHeader,
+    });
     res.status === 204 && dispatch(deleteTodo(props.todo.id));
   };
 
@@ -38,6 +44,7 @@ const Todo = (props: Props) => {
       }),
       headers: {
         "Content-Type": "application/json",
+        ...authHeader,
       },
     });
     res.status === 201 && dispatch(updateTodo(updatedTodo));

@@ -1,18 +1,30 @@
 import { NextFunction, Request, Response } from "express";
 import { validationResult } from "express-validator";
 import User from "../models/user";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  const user = new User({
-    email: req.body.email,
-    password: req.body.password,
+
+  const user = await User.findOne({ email: req.body.email });
+  if (user) {
+    return res.status(401).json({ msg: "Email already in use" });
+  }
+
+  bcrypt.genSalt(10, async (err, salt) => {
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const user = new User({
+      email: req.body.email,
+      password: hashedPassword,
+    });
+    await user.save();
+
+    res.status(201).json({ msg: "User created successfully!" });
   });
-  await user.save();
-  res.status(201).json({ msg: "User created successfully!", userId: user._id });
 };
 
 const loginUser = async (req: Request, res: Response, next: NextFunction) => {
@@ -26,10 +38,13 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     return res.status(401).json({ msg: "Incorrect credentials" });
   }
 
-  if (user.password !== req.body.password) {
-    return res.status(401).json({ msg: "Incorrect credentials" });
+  const validatePassword = await bcrypt.compare(req.body.password, user.password);
+
+  if (validatePassword) {
+    const token = jwt.sign({ userId: user._id }, "secret", { expiresIn: 20 });
+    return res.status(200).json({ msg: "Login successful", token });
   } else {
-    return res.status(200).json({ msg: "Login successful" });
+    return res.status(401).json({ msg: "Incorrect credentials" });
   }
 };
 
