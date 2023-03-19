@@ -23,6 +23,7 @@ Tracks todos based on logged in user.
 * Node.js
 * Express.js
 * MongoDB
+* Mongoose
 * CSS
 
 ## Setup
