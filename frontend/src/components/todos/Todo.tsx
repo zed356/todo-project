@@ -31,7 +31,7 @@ const Todo = (props: Props) => {
       method: "DELETE",
       headers: authHeader,
     });
-    res.status === 204 && dispatch(deleteTodo(props.todo.id));
+    res.status === 200 && dispatch(deleteTodo(props.todo.id));
   };
 
   const updateTodoHandler = async (updatedTodo: TodoType) => {

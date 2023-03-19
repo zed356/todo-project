@@ -24,7 +24,7 @@ const deleteTodo = (req: Request, res: Response) => {
   const targetId = new mongoose.Types.ObjectId(req.params.todoId);
 
   Todo.deleteOne({ _id: targetId }).then(() => {
-    res.status(204).json({ msg: "Successfully deleted!" });
+    res.status(200).json({ msg: "Successfully deleted!" });
   });
 };
 
