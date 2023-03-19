@@ -71,7 +71,6 @@ const Todo = (props: Props) => {
     }
   };
 
-  // const todoDate = new Date(props.todo.date);
   const dateString = (dates: string) => {
     const todoDate = new Date(dates);
     return `${("0" + todoDate.getDate()).slice(-2)}/${("0" + (todoDate.getMonth() + 1)).slice(
