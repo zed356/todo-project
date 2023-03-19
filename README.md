@@ -19,6 +19,7 @@ Tracks todos based on logged in user.
 
 ## Technologies
 * JavaScript
+* TypeScript
 * React
 * Node.js
 * Express.js
