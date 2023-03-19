@@ -1,10 +1,11 @@
-import mongoose from "mongoose";
-import express from "express";
-import cors from "cors";
 import bodyParser from "body-parser";
-import todos from "./routes/todos";
-import auth from "./routes/auth";
+import cors from "cors";
 import dotenv from "dotenv";
+import express from "express";
+import fs from "fs";
+import mongoose from "mongoose";
+import auth from "./routes/auth";
+import todos from "./routes/todos";
 
 const app = express();
 
@@ -18,16 +19,18 @@ app.use(todos);
 
 app.use(auth);
 
-dotenv.config({ path: __dirname + "/../development.env" });
+if (fs.existsSync(__dirname + "/../development.env")) {
+  dotenv.config({ path: __dirname + "/../development.env" });
+} else {
+  dotenv.config({ path: __dirname + "/../public.env" });
+}
 
 mongoose
   .connect(
     `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.kap9i.mongodb.net/firstproj-todos`
   )
-  .then((result: any) => {
-    return console.log("successfully connected to mongo!");
-  })
-  .then((result: any) => {
+  .then(() => {
+    console.log("successfully connected to mongo!");
     app.listen(8080);
   })
-  .catch((err: any) => console.log(err));
+  .catch((err) => console.log(err));

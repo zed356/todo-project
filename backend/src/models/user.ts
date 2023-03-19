@@ -1,5 +1,4 @@
-import mongoose, { Schema, model } from "mongoose";
-import todo, { TodoType } from "./todo";
+import { model, Schema } from "mongoose";
 
 interface User {
   email: string;

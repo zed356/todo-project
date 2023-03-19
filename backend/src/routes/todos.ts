@@ -1,6 +1,6 @@
 import express from "express";
-import todoController from "../controllers/todos";
 import { body } from "express-validator";
+import todoController from "../controllers/todos";
 import authJwt from "../middlewares/authJwt";
 
 const router = express.Router();

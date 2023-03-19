@@ -1,5 +1,5 @@
-import { useAppDispatch } from "./hooks";
 import { login, logout } from "store/authSlice";
+import { useAppDispatch } from "./hooks";
 
 const useVerify = async () => {
   const dispatch = useAppDispatch();

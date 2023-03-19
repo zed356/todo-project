@@ -1,13 +1,13 @@
-import Todo from "./Todo";
-import AddTodo from "./AddTodo";
-import classes from "./TodosList.module.css";
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import Modal from "../ui/Modal";
-import LoadingSpinner from "../ui/LoadingSpinner";
-import { setInitialTodoList } from "../../store/todoListSlice";
-import type { TodoType } from "./Todo";
 import { logout } from "store/authSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { setInitialTodoList } from "../../store/todoListSlice";
+import LoadingSpinner from "../ui/LoadingSpinner";
+import Modal from "../ui/Modal";
+import AddTodo from "./AddTodo";
+import type { TodoType } from "./Todo";
+import Todo from "./Todo";
+import classes from "./TodosList.module.css";
 
 const TodosList = () => {
   const [showErrorModal, setShowErrorModal] = useState({ show: false, error: "" });

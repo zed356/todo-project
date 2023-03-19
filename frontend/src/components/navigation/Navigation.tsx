@@ -1,8 +1,8 @@
-import { Fragment } from "react";
-import { useAppSelector } from "../../hooks/hooks";
-import { NavLink } from "react-router-dom";
-import classes from "./navigation.module.css";
 import Logout from "components/user/Logout";
+import { Fragment } from "react";
+import { NavLink } from "react-router-dom";
+import { useAppSelector } from "../../hooks/hooks";
+import classes from "./navigation.module.css";
 
 const Navigation = () => {
   const auth = useAppSelector((state) => state.auth.isAuth);

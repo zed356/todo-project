@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
-import classes from "./Todo.module.css";
-import { useAppDispatch } from "../../hooks/hooks";
-import { deleteTodo, updateTodo } from "../../store/todoListSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "store/store";
+import { useAppDispatch } from "../../hooks/hooks";
+import { deleteTodo, updateTodo } from "../../store/todoListSlice";
+import classes from "./Todo.module.css";
 
 interface Props {
   todo: TodoType;

@@ -1,15 +1,15 @@
+import Logout from "components/user/Logout";
+import useVerify from "hooks/useVerify";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Navigation from "./components/navigation/Navigation";
+import NotLoggedInRoute from "./components/navigation/NotLoggedInRoute";
+import PageNotFound from "./components/navigation/PageNotFound";
+import ProtectedRoute from "./components/navigation/ProtectedRoute";
 import CompletedTodos from "./components/todos/CompletedTodos";
 import TodosList from "./components/todos/TodosList";
 import Login from "./components/user/Login";
-import ProtectedRoute from "./components/navigation/ProtectedRoute";
-import PageNotFound from "./components/navigation/PageNotFound";
 import Register from "./components/user/Register";
-import NotLoggedInRoute from "./components/navigation/NotLoggedInRoute";
-import Logout from "components/user/Logout";
-import useVerify from "hooks/useVerify";
 
 function App() {
   useVerify();

@@ -1,10 +1,8 @@
-import { useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import { login } from "../../store/authSlice";
-
 import classes from "./login.module.css";
-import { useEffect } from "react";
 
 const Login = () => {
   const navigate = useNavigate();

@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
-import Card from "../ui/Card";
-import classes from "./AddTodo.module.css";
-import { useAppDispatch } from "../../hooks/hooks";
-import { addTodo } from "../../store/todoListSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "store/store";
+import { useAppDispatch } from "../../hooks/hooks";
+import { addTodo } from "../../store/todoListSlice";
+import Card from "../ui/Card";
+import classes from "./AddTodo.module.css";
 
 interface PropsType {
   inputError: (a: string) => void;
@@ -19,7 +19,7 @@ const AddTodo = (props: PropsType) => {
   const submitTodoHandler = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!inputRef.current) throw Error("inputRef is not assigned");
-    if (inputRef.current.value.length === 0 || !isNaN(Number(inputRef.current.value))) {
+    if (!inputRef.current.value.length || !isNaN(Number(inputRef.current.value))) {
       props.inputError("Enter a valid todo!");
       throw Error("Enter a valid todo!");
     }

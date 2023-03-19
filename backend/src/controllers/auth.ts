@@ -1,10 +1,10 @@
-import { NextFunction, Request, Response } from "express";
-import { validationResult } from "express-validator";
-import User from "../models/user";
 import bcrypt from "bcrypt";
+import { Request, Response } from "express";
+import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
+import User from "../models/user";
 
-const createUser = async (req: Request, res: Response, next: NextFunction) => {
+const createUser = async (req: Request, res: Response) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -27,7 +27,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-const loginUser = async (req: Request, res: Response, next: NextFunction) => {
+const loginUser = async (req: Request, res: Response) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(401).json({ errors: errors.array() });
