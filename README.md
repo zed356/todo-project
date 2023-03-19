@@ -13,6 +13,10 @@ Goal is to have a portfolio project that is growing in features over time.
 ## Current features
 Tracks todos based on logged in user.
 
+#### To do:
+* Change design to be more appealing.
+* Add a calendar to visualise when todos were completed.
+
 ## Technologies
 * JavaScript
 * React
