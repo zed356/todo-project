@@ -1,8 +1,6 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import classes from "./Register.module.css";
-
 const Register = () => {
   const [emailErrorMsg, setEmailErrorMsg] = useState("");
   const [passwordErrorMsg, setPasswordErrorMsg] = useState("");
@@ -59,22 +57,37 @@ const Register = () => {
   };
 
   return (
-    <div className={classes["form-control"]}>
-      <form onSubmit={submitHandler}>
+    <div className="flex justify-center">
+      <form
+        className="flex flex-col mt-12 items-center w-[11%] border-[1px] border-sky-600 rounded-lg p-4"
+        onSubmit={submitHandler}
+      >
         <label>E-mail</label>
-        <input ref={emailInputRef} name="email" id="email" type="text" />
-        {emailErrorMsg && <span className={classes["error-msg"]}>{emailErrorMsg}</span>}
+        <input className="w-full" ref={emailInputRef} name="email" id="email" type="text" />
+        {emailErrorMsg && <span className="text-[red]">{emailErrorMsg}</span>}
         <label>Password</label>
-        <input ref={passwordInputRef} name="password" id="password" type="password" />
-        <label>Confirm Password</label>
         <input
+          className="w-full"
+          ref={passwordInputRef}
+          name="password"
+          id="password"
+          type="password"
+        />
+        <label className="text-center">Confirm Password</label>
+        <input
+          className="w-full"
           ref={confirmPasswordInputRef}
           name="confirm-password"
           id="confirm-password"
           type="password"
         />
-        {passwordErrorMsg && <span className={classes["error-msg"]}>{passwordErrorMsg}</span>}
-        <button type="submit">Register</button>
+        {passwordErrorMsg && <span className="text-[red]">{passwordErrorMsg}</span>}
+        <button
+          className="m-auto mt-2 align-middle w-20 border-[1px] border-sky-600 rounded-md hover:bg-green-400 active:bg-green-300"
+          type="submit"
+        >
+          Register
+        </button>
       </form>
     </div>
   );

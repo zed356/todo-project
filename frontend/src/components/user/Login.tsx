@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { login } from "../../store/authSlice";
-import classes from "./login.module.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -48,16 +47,19 @@ const Login = () => {
   };
 
   return (
-    <div className={classes.container}>
-      <form onSubmit={loginHandler} className={classes["form-control"]}>
+    <div className="flex justify-center w-full">
+      <form
+        onSubmit={loginHandler}
+        className="flex flex-col items-center w-[11%] border-[1px] border-sky-600 rounded-lg p-4 mt-12"
+      >
         <label htmlFor="email">E-mail</label>
-        <input ref={emailInputRef} name="email" type="text" />
-        <label htmlFor="password" className={classes["form-control--label"]}>
-          Password
-        </label>
-        <input ref={passwordInputRef} name="password" type="password" />
-        <section className={classes["form-control__error-msg"]}>{inputErrorMsg}</section>
-        <button>Login</button>
+        <input className="w-full" ref={emailInputRef} name="email" type="text" />
+        <label htmlFor="password">Password</label>
+        <input className="w-full" ref={passwordInputRef} name="password" type="password" />
+        <section className="mt-2 text-[red] flex flex-col">{inputErrorMsg}</section>
+        <button className="m-auto mt-2 align-middle w-20 border-[1px] border-sky-600 rounded-md hover:bg-green-400 active:bg-green-300">
+          Login
+        </button>
       </form>
     </div>
   );
