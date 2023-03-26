@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { logout } from "store/authSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setInitialTodoList } from "../../store/todoListSlice";
@@ -34,28 +34,30 @@ const TodosList = () => {
       </ul>
     );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("http://localhost:8080/todos", {
-        headers: authHeader,
-      });
-      if (res.status === 200) {
-        const data = await res.json();
-        dispatch(
-          setInitialTodoList(
-            data.map((el: TodoType) => {
-              return { ...el, id: el._id };
-            })
-          )
-        );
-        setIsLoading(false);
-      } else {
-        dispatch(logout());
-      }
-    };
-
-    fetchData();
+  const fetchData = useCallback(async () => {
+    const res = await fetch("http://localhost:8080/todos", {
+      headers: authHeader,
+    });
+    if (res.status === 200) {
+      const data = await res.json();
+      dispatch(
+        setInitialTodoList(
+          data.map((el: TodoType) => {
+            return { ...el, id: el._id };
+          })
+        )
+      );
+      setIsLoading(false);
+    } else {
+      dispatch(logout());
+    }
   }, [dispatch, authHeader]);
+
+  useEffect(() => {
+    if (Object.keys(authHeader).length) {
+      fetchData();
+    }
+  }, [fetchData, authHeader]);
 
   return (
     <main className={classes.main}>
