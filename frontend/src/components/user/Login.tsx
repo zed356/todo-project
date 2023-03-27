@@ -1,3 +1,4 @@
+import Button from "components/ui/Button";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -57,9 +58,7 @@ const Login = () => {
         <label htmlFor="password">Password</label>
         <input className="w-full" ref={passwordInputRef} name="password" type="password" />
         <section className="mt-2 text-[red] flex flex-col">{inputErrorMsg}</section>
-        <button className="m-auto mt-2 align-middle w-20 border-[1px] border-sky-600 rounded-md hover:bg-green-400 active:bg-green-300">
-          Login
-        </button>
+        <Button type="submit">Login</Button>
       </form>
     </div>
   );

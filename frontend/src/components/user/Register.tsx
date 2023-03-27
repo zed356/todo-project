@@ -1,3 +1,4 @@
+import Button from "components/ui/Button";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -82,12 +83,7 @@ const Register = () => {
           type="password"
         />
         {passwordErrorMsg && <span className="text-[red]">{passwordErrorMsg}</span>}
-        <button
-          className="m-auto mt-2 align-middle w-20 border-[1px] border-sky-600 rounded-md hover:bg-green-400 active:bg-green-300"
-          type="submit"
-        >
-          Register
-        </button>
+        <Button type="submit">Register</Button>
       </form>
     </div>
   );

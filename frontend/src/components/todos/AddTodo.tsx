@@ -1,10 +1,10 @@
+import Button from "components/ui/Button";
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "store/store";
 import { useAppDispatch } from "../../hooks/hooks";
 import { addTodo } from "../../store/todoListSlice";
 import Card from "../ui/Card";
-import classes from "./AddTodo.module.css";
 
 interface PropsType {
   inputError: (a: string) => void;
@@ -49,20 +49,18 @@ const AddTodo = (props: PropsType) => {
 
   return (
     <Card>
-      <div className={classes.container}>
-        <form id="todo" className={classes["form-control"]} onSubmit={submitTodoHandler}>
-          <textarea
-            className={classes.textarea}
-            form="todo"
-            maxLength={50}
-            ref={inputRef}
-            placeholder="todo text"
-            name="todo"
-          />
-          <label htmlFor="todo"></label>
-          <button type="submit">Create</button>
-        </form>
-      </div>
+      <form id="todo" className="flex flex-col" onSubmit={submitTodoHandler}>
+        <textarea
+          className="resize-none focus:outline  focus:outline-sky-600 focus:outline-1"
+          form="todo"
+          maxLength={50}
+          ref={inputRef}
+          placeholder="todo text"
+          name="todo"
+        />
+        <label htmlFor="todo"></label>
+        <Button type="submit">Create</Button>
+      </form>
     </Card>
   );
 };
