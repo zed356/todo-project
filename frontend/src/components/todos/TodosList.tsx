@@ -7,7 +7,6 @@ import Modal from "../ui/Modal";
 import AddTodo from "./AddTodo";
 import type { TodoType } from "./Todo";
 import Todo from "./Todo";
-import classes from "./TodosList.module.css";
 
 const TodosList = () => {
   const [showErrorModal, setShowErrorModal] = useState({ show: false, error: "" });
@@ -20,16 +19,18 @@ const TodosList = () => {
   const errorModalHandler = (msg: string) => {
     setShowErrorModal({ show: true, error: msg });
   };
-
+  console.log(todoList);
   const todoListCheckIfEmpty =
-    todoList.length === 0 ? (
+    todoList.filter((el) => !el.completed).length === 0 ? (
       (isLoading && <LoadingSpinner />) || (
-        <div className={classes.bounce}>
-          <span className={classes["empty-todo-msg"]}>Add a todo!</span>
+        <div className="mt-16 animate-bounce">
+          <span className="p-2 border-[0.25rem] rounded-[0.25rem] border-sky-600 font-sans">
+            Add a todo!
+          </span>
         </div>
       )
     ) : (
-      <ul className={classes["todo-list"]}>
+      <ul className="flex mt-12 flex-col justify-center items-center w-[15%]">
         {todoList.map((el) => !el.completed && <Todo todo={el} key={el.id} />)}
       </ul>
     );
@@ -60,8 +61,8 @@ const TodosList = () => {
   }, [fetchData, authHeader]);
 
   return (
-    <main className={classes.main}>
-      <h2 className={classes.header}>Todos</h2>
+    <main className="flex flex-col items-center w-auto">
+      <h2 className="border-b-2 border-sky-600 my-2 font-sans text-lg">Todos</h2>
       <AddTodo
         addingTodo={() => {
           setIsLoading(true);
