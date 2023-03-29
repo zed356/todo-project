@@ -13,9 +13,9 @@ No tutorials were used, only documentations of technologies.
 * [Setup](#setup)
 
 ## Current features
-Tracks todos based on logged in user.
-CRUD operations.
-Basic filtering.
+Tracks todos based on logged in user.  
+CRUD operations.  
+Basic filtering.  
 
 #### To do:
 * Change design to be more appealing.
