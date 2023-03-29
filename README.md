@@ -14,6 +14,8 @@ No tutorials were used, only documentations of technologies.
 
 ## Current features
 Tracks todos based on logged in user.
+CRUD operations.
+Basic filtering.
 
 #### To do:
 * Change design to be more appealing.
