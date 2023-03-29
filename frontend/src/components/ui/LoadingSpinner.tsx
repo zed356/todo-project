@@ -1,5 +1,4 @@
 import { JsxElement } from "typescript";
-import classes from "./LoadingSpinner.module.css";
 
 interface Props {
   children?: JsxElement | JsxElement[];
@@ -7,13 +6,20 @@ interface Props {
 
 const LoadingSpinner = (props: Props) => {
   return (
-    <div className={classes["lds-ellipsis"]}>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+    <div className="inline-block relative w-[80px] h-[80px]">
+      <div className="absolute top-[33px] w-[13px] h-[13px] rounded-[50%] bg-white left-2 animate-loadingSpinner1"></div>
+      <div className="absolute top-[33px] w-[13px] h-[13px] rounded-[50%] bg-white left-2 animate-loadingSpinner2"></div>
+      <div className="absolute top-[33px] w-[13px] h-[13px] rounded-[50%] bg-white left-8 animate-loadingSpinner2"></div>
+      <div className="absolute top-[33px] w-[13px] h-[13px] rounded-[50%] bg-white left-14 animate-loadingSpinner3"></div>
     </div>
   );
 };
 
 export default LoadingSpinner;
+
+/* <div className="inline-block relative w-[80px] h-[80px]">
+<div className="absolute top-[33px] w-[13px] h-[13px] rounded-[50%] bg-white ease-[0,1,1,0]  left-2 animate-loadingSpinner1"></div>
+<div className="absolute top-[33px] w-[13px] h-[13px] rounded-[50%] bg-white ease-[0,1,1,0] left-2 animate-loadingSpinner2"></div>
+<div className="absolute top-[33px] w-[13px] h-[13px] rounded-[50%] bg-white ease-[0,1,1,0] left-8 animate-loadingSpinner2"></div>
+<div className="absolute top-[33px] w-[13px] h-[13px] rounded-[50%] bg-white ease-[0,1,1,0] left-14 animate-loadingSpinner3"></div>
+</div> */
