@@ -27,7 +27,7 @@ Tracks todos based on logged in user.
 * Express.js
 * MongoDB
 * Mongoose
-* CSS
+* TailwindCSS
 
 ## Setup
 To run this project, please request login credentials to the database (mongodb).    
