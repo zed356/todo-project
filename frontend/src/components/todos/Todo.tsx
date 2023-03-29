@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "store/store";
 import { useAppDispatch } from "../../hooks/hooks";
 import { deleteTodo, updateTodo } from "../../store/todoListSlice";
-import classes from "./Todo.module.css";
 
 interface Props {
   todo: TodoType;
@@ -81,43 +80,60 @@ const Todo = (props: Props) => {
   };
 
   const todoIfNotCompleted = !editing ? (
-    <div className={classes["top-todo-container"]}>
-      <span>{dateString(props.todo.dateCreated)}</span>
-      <div className={classes.buttons}>
-        <div className={classes.completed} onClick={completedHandler}>
+    <div className="flex justify-between border-b border-sky-600">
+      <span className="italic text-sm text-custom-bluegray flex items-center">
+        {dateString(props.todo.dateCreated)}
+      </span>
+      <div className="flex justify-end">
+        <div
+          className="ml-2 text-slate-400 scale-[1.05] cursor-default transition-all duration-100 ease-in-out hover:text-green-500 hover:scale-[1.1]"
+          onClick={completedHandler}
+        >
           ☑
         </div>
-        <div onClick={editHandler} className={classes.edit}>
+        <div
+          onClick={editHandler}
+          className="ml-2 text-gray-600 scale-[1.05]  cursor-default transition-all duration-100 ease-in-out hover:text-[black] hover:scale-[1.1]"
+        >
           🖊
         </div>
-        <div onClick={deleteTodoHandler} className={classes.delete}>
+        <div
+          onClick={deleteTodoHandler}
+          className="ml-2  cursor-default transition-all duration-100 ease-in-out hover:text-[red] hover:scale-[1.1]"
+        >
           ✖
         </div>
       </div>
     </div>
   ) : (
-    <div className={classes["save-container"]}>
-      <div onClick={saveEditHandler} className={classes.saveEditedTodo}>
+    <div className="flex">
+      <div
+        onClick={saveEditHandler}
+        className="cursor-default transition-all duration-100 hover:scale-[1.1]"
+      >
         💾
       </div>
     </div>
   );
 
   const todoIfCompleted = (
-    <div className={classes["top-todo-container"]}>
-      <span>
+    <div className="flex justify-between border-b border-sky-600">
+      <span className="italic text-sm text-custom-bluegray flex items-center">
         {dateString(props.todo.dateCreated)} {"-->"} {dateString(props.todo.dateCompleted!)}
       </span>
-      <div className={classes.buttons}>
+      <div className="flex justify-end">
         <div
-          className={classes["if-completed"]}
+          className="text-green-500 scale-[1.1] hover:scale-[1.24] hover:text-[red] transition-all duration-100 delay-75 ease-in-out cursor-default"
           onClick={completedHandler}
           onMouseEnter={() => setHovering(true)}
           onMouseLeave={() => setHovering(false)}
         >
           {!isHovering ? "☑" : "◻"}
         </div>
-        <div onClick={deleteTodoHandler} className={classes.delete}>
+        <div
+          onClick={deleteTodoHandler}
+          className="ml-2  cursor-default transition-all duration-100 ease-in-out hover:text-[red] hover:scale-[1.1]"
+        >
           ✖
         </div>
       </div>
@@ -125,13 +141,17 @@ const Todo = (props: Props) => {
   );
 
   return (
-    <li className={classes["list-item"]}>
-      <div className={classes.todo}>
+    <li className="flex list-none mx-4 mb-2 flex-col items-center w-full">
+      <div className="border border-sky-600 rounded-lg px-2 bg-slate-50 w-full h-auto break-normal whitespace-pre-wrap overflow-hidden">
         {props.todo.completed ? todoIfCompleted : todoIfNotCompleted}
         {!editing ? (
-          <p>{props.todo.text}</p>
+          <p className="mt-[0.3rem] mb-2">{props.todo.text}</p>
         ) : (
-          <textarea ref={editedTodoRef} defaultValue={props.todo.text} />
+          <textarea
+            className="mt-[0.3rem] mb-2 w-full resize-none box-border"
+            ref={editedTodoRef}
+            defaultValue={props.todo.text}
+          />
         )}
       </div>
     </li>

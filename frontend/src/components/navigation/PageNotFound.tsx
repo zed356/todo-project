@@ -1,15 +1,10 @@
-import classes from "./PageNotFound.module.css";
-
 const PageNotFound = () => {
   return (
-    <div className={classes.error}>
-      <h1>404 - Page Not Found</h1>
-      <img
-        className={classes.img}
-        src="https://cdn.svgator.com/images/2022/01/cat.png"
-        alt="Kitty playing with yarn"
-      ></img>
-    </div>
+    <img
+      className="w-1/2 top-1/2 fixed -translate-y-1/2 left-1/4"
+      src="https://cdn.svgator.com/images/2022/01/cat.png"
+      alt="Kitty playing with yarn"
+    ></img>
   );
 };
 
