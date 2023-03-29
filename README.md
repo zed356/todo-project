@@ -2,7 +2,7 @@
 Simple todo tracker app.
 
 ## Introduction
-Training project to practice frontend, backend and database development.  
+Training project to practise frontend, backend and database development.  
 Goal is to have a portfolio project that is growing in features over time.  
 
 No tutorials were used, only documentations of technologies.
@@ -13,7 +13,9 @@ No tutorials were used, only documentations of technologies.
 * [Setup](#setup)
 
 ## Current features
-Tracks todos based on logged in user.
+Tracks todos based on logged in user.  
+CRUD operations.  
+Basic filtering.  
 
 #### To do:
 * Change design to be more appealing.
@@ -27,7 +29,7 @@ Tracks todos based on logged in user.
 * Express.js
 * MongoDB
 * Mongoose
-* CSS
+* TailwindCSS
 
 ## Setup
 To run this project, please request login credentials to the database (mongodb).    
