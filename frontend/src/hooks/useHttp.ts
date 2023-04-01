@@ -40,7 +40,7 @@ const useHttp = () => {
           }
         }
 
-        // Sends http request
+        // Sends http request and parses responseData
         const res = await fetch(url, {
           method,
           body,
