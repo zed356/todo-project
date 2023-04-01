@@ -1,8 +1,7 @@
 import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "store/store";
 import { useAppDispatch } from "../../hooks/hooks";
 import { deleteTodo, updateTodo } from "../../store/todoListSlice";
+import useHttp from "hooks/useHttp";
 
 interface Props {
   todo: TodoType;
@@ -21,32 +20,36 @@ const Todo = (props: Props) => {
   const [editing, setEditing] = useState(false);
   const [isHovering, setHovering] = useState(false);
   const editedTodoRef = useRef<HTMLTextAreaElement>(null);
+  const { sendRequest } = useHttp();
 
   const dispatch = useAppDispatch();
-  const authHeader = useSelector((state: RootState) => state.auth.authHeader);
 
   const deleteTodoHandler = async () => {
-    const res = await fetch(`http://localhost:8080/delete/${props.todo.id}`, {
+    const resData = await sendRequest({
+      url: `http://localhost:8080/delete/${props.todo.id}`,
       method: "DELETE",
-      headers: authHeader,
+      reqAuth: true,
     });
-    res.status === 200 && dispatch(deleteTodo(props.todo.id));
+    if (resData) {
+      dispatch(deleteTodo(props.todo.id));
+    }
   };
 
   const updateTodoHandler = async (updatedTodo: TodoType) => {
-    const res = await fetch(`http://localhost:8080/update/${updatedTodo.id}`, {
+    const resData = await sendRequest({
+      url: `http://localhost:8080/update/${updatedTodo.id}`,
       method: "PATCH",
       body: JSON.stringify({
         text: updatedTodo.text,
         completed: updatedTodo.completed,
         dateCompleted: updatedTodo.dateCompleted,
       }),
-      headers: {
-        "Content-Type": "application/json",
-        ...authHeader,
-      },
+      reqAuth: true,
     });
-    res.status === 201 && dispatch(updateTodo(updatedTodo));
+    // resData will only exist if the http request was successful
+    if (resData) {
+      dispatch(updateTodo(updatedTodo));
+    }
   };
 
   const editHandler = () => {

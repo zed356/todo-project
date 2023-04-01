@@ -52,11 +52,12 @@ const useHttp = () => {
           throw new Error(resData.message || "Something went wrong!");
         }
         setData(resData);
+        return resData;
       } catch (error: any) {
         setError(error.message);
+      } finally {
+        setIsloading(false);
       }
-
-      setIsloading(false);
     },
     [authHeader]
   );
