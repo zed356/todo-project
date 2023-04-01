@@ -19,7 +19,6 @@ const TodosList = () => {
   const errorModalHandler = (msg: string) => {
     setShowErrorModal({ show: true, error: msg });
   };
-  console.log(todoList);
   const todoListCheckIfEmpty =
     todoList.filter((el) => !el.completed).length === 0 ? (
       (isLoading && <LoadingSpinner />) || (
