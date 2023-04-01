@@ -12,7 +12,7 @@ interface PropsType {
 const AddTodo = (props: PropsType) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useAppDispatch();
-  const { sendRequest } = useHttp();
+  const { sendRequest, isLoading } = useHttp();
 
   const submitTodoHandler = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -59,7 +59,9 @@ const AddTodo = (props: PropsType) => {
             name="todo"
           />
           <label htmlFor="todo"></label>
-          <Button type="submit">Create</Button>
+          <Button isLoading={isLoading} type="submit">
+            Create
+          </Button>
         </form>
       </Card>
     </Fragment>
