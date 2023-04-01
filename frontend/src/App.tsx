@@ -12,6 +12,8 @@ import Login from "./components/user/Login";
 import Register from "./components/user/Register";
 
 function App() {
+  // Upon visiting the site, checks if user has a stored token.
+  // If yes, sends an http request to check if it's still valid. Logs in automatically if it is.
   useVerify();
   return (
     <React.Fragment>
