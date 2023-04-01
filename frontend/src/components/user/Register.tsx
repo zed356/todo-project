@@ -13,6 +13,8 @@ const Register = () => {
   const { sendRequest, isLoading, data, error } = useHttp();
   const navigate = useNavigate();
 
+  // sendRequest will only setData if the request is successful.
+  // Otherwise an error will be set
   useEffect(() => {
     if (error) {
       setEmailErrorMsg("Please enter valid login credentials");
