@@ -5,7 +5,7 @@ import { useAppSelector } from "./hooks";
 interface SendRequest {
   url: string;
   method: "GET" | "POST" | "PATCH" | "DELETE";
-  body: any; // to be filled in
+  body?: any; // to be filled in
   headers?: any;
   reqAuth: boolean;
 }
