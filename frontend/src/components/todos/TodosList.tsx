@@ -5,9 +5,9 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import Modal from "../ui/Modal";
 import AddTodo from "./AddTodo";
-import Todo from "./Todo";
 import { TodoType } from "./Todo";
 import { setInitialTodoList } from "store/todoListSlice";
+import Pagination from "./Pagination";
 
 const TodosList = () => {
   const [showErrorModal, setShowErrorModal] = useState({ show: false, error: "" });
@@ -65,9 +65,10 @@ const TodosList = () => {
       ) : (
         // Displays incomplete todos if any
         <ul className="flex mt-12 flex-col justify-center items-center w-[15%]">
-          {tempDataArr.map((el: TodoType) => (
+          {/* {tempDataArr.map((el: TodoType) => (
             <Todo todo={el} key={el.id} />
-          ))}
+          ))} */}
+          <Pagination todos={tempDataArr} />
         </ul>
       );
   }
