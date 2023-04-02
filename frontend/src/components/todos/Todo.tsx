@@ -23,7 +23,6 @@ const Todo = (props: Props) => {
 
   const { sendRequest, isLoading } = useHttp();
 
-
   const dispatch = useAppDispatch();
 
   const deleteTodoHandler = async () => {
@@ -89,7 +88,7 @@ const Todo = (props: Props) => {
       <span className="italic text-sm text-custom-bluegray flex items-center">
         {dateString(props.todo.dateCreated)}
       </span>
-      <div className="flex justify-end">
+      <div className="flex justify-end select-none">
         <div
           className="ml-2 text-slate-400 scale-[1.05] cursor-default transition-all duration-100 ease-in-out hover:text-green-500 hover:scale-[1.1]"
           onClick={completedHandler}
@@ -116,7 +115,7 @@ const Todo = (props: Props) => {
     <div className="flex">
       <div
         onClick={saveEditHandler}
-        className="cursor-default transition-all duration-100 hover:scale-[1.1]"
+        className="cursor-default transition-all duration-100 hover:scale-[1.1] select-none"
       >
         💾
       </div>
@@ -133,7 +132,7 @@ const Todo = (props: Props) => {
           {dateString(props.todo.dateCompleted!)}
         </span>
       </span>
-      <div className="flex justify-end">
+      <div className="flex justify-end select-none">
         <div
           className="text-green-500 scale-[1.1] hover:scale-[1.24] hover:text-[red] transition-all duration-100 delay-75 ease-in-out cursor-default"
           onClick={completedHandler}
