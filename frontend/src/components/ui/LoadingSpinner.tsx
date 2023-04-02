@@ -16,10 +16,3 @@ const LoadingSpinner = (props: Props) => {
 };
 
 export default LoadingSpinner;
-
-/* <div className="inline-block relative w-[80px] h-[80px]">
-<div className="absolute top-[33px] w-[13px] h-[13px] rounded-[50%] bg-white ease-[0,1,1,0]  left-2 animate-loadingSpinner1"></div>
-<div className="absolute top-[33px] w-[13px] h-[13px] rounded-[50%] bg-white ease-[0,1,1,0] left-2 animate-loadingSpinner2"></div>
-<div className="absolute top-[33px] w-[13px] h-[13px] rounded-[50%] bg-white ease-[0,1,1,0] left-8 animate-loadingSpinner2"></div>
-<div className="absolute top-[33px] w-[13px] h-[13px] rounded-[50%] bg-white ease-[0,1,1,0] left-14 animate-loadingSpinner3"></div>
-</div> */

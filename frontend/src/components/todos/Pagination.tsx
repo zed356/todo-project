@@ -41,11 +41,9 @@ const Pagination = (props: Props) => {
           >
             {"⬅"}
           </span>
-
           <span className={`${nudge && "animate-ping"} select-none text-custom-bluegray`}>
             {curPage}
           </span>
-
           <span
             onClick={incrementCurPage}
             className={`${
