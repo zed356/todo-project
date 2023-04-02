@@ -12,7 +12,9 @@ interface PropsType {
 const AddTodo = (props: PropsType) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useAppDispatch();
+
   const { sendRequest, isLoading } = useHttp();
+
 
   const submitTodoHandler = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -51,7 +53,9 @@ const AddTodo = (props: PropsType) => {
       <Card>
         <form id="todo" className="flex flex-col" onSubmit={submitTodoHandler}>
           <textarea
+
             className="resize-none leading-5 focus:outline  focus:outline-sky-600 focus:outline-1"
+
             form="todo"
             maxLength={50}
             ref={inputRef}
@@ -59,9 +63,11 @@ const AddTodo = (props: PropsType) => {
             name="todo"
           />
           <label htmlFor="todo"></label>
+
           <Button isLoading={isLoading} type="submit">
             Create
           </Button>
+
         </form>
       </Card>
     </Fragment>

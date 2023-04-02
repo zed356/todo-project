@@ -5,9 +5,11 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import Modal from "../ui/Modal";
 import AddTodo from "./AddTodo";
+
 import { TodoType } from "./Todo";
 import { setInitialTodoList } from "store/todoListSlice";
 import Pagination from "./Pagination";
+
 
 const TodosList = () => {
   const [showErrorModal, setShowErrorModal] = useState({ show: false, error: "" });
