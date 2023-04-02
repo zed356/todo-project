@@ -122,7 +122,12 @@ const Todo = (props: Props) => {
   const todoIfCompleted = (
     <div className="flex justify-between border-b border-sky-600">
       <span className="italic text-sm text-custom-bluegray flex items-center">
-        {dateString(props.todo.dateCreated)} {"-->"} {dateString(props.todo.dateCompleted!)}
+        {dateString(props.todo.dateCreated)} {"-->"}{" "}
+        <span
+          className={`transition-colors ${isHovering ? "text-custom-bluegray" : "text-green-500"}`}
+        >
+          {dateString(props.todo.dateCompleted!)}
+        </span>
       </span>
       <div className="flex justify-end">
         <div
