@@ -20,7 +20,9 @@ const Todo = (props: Props) => {
   const [editing, setEditing] = useState(false);
   const [isHovering, setHovering] = useState(false);
   const editedTodoRef = useRef<HTMLTextAreaElement>(null);
-  const { sendRequest } = useHttp();
+
+  const { sendRequest, isLoading } = useHttp();
+
 
   const dispatch = useAppDispatch();
 
@@ -102,7 +104,9 @@ const Todo = (props: Props) => {
         </div>
         <div
           onClick={deleteTodoHandler}
-          className="ml-2  cursor-default transition-all duration-100 ease-in-out hover:text-[red] hover:scale-[1.1]"
+          className={`ml-2  cursor-default transition-all duration-100 ease-in-out hover:text-[red] hover:scale-[1.1] ${
+            isLoading && "hover:cursor-wait"
+          }`}
         >
           ✖
         </div>
@@ -140,7 +144,9 @@ const Todo = (props: Props) => {
         </div>
         <div
           onClick={deleteTodoHandler}
-          className="ml-2  cursor-default transition-all duration-100 ease-in-out hover:text-[red] hover:scale-[1.1]"
+          className={`ml-2  cursor-default transition-all duration-100 ease-in-out hover:text-[red] hover:scale-[1.1] ${
+            isLoading && "hover:cursor-wait"
+          }`}
         >
           ✖
         </div>
