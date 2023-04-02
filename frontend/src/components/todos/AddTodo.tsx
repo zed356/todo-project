@@ -51,7 +51,7 @@ const AddTodo = (props: PropsType) => {
       <Card>
         <form id="todo" className="flex flex-col" onSubmit={submitTodoHandler}>
           <textarea
-            className="resize-none focus:outline  focus:outline-sky-600 focus:outline-1"
+            className="resize-none leading-5 focus:outline  focus:outline-sky-600 focus:outline-1"
             form="todo"
             maxLength={50}
             ref={inputRef}
